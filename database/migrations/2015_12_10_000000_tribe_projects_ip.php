@@ -9,13 +9,14 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('tribe_projects_whitelisted_ips', function (Blueprint $table) {
+        $projectClass = config('tribe.models.project');
+        Schema::create('tribe_projects_whitelisted_ips', function (Blueprint $table) use ($projectClass) {
             $table->id();
             $table->string('xid')->unique();
             $table->string('comment')->nullable();
 
-            $table->foreignIdFor(Project::class)
-                ->constrained((new Project())->getTable())
+            $table->foreignIdFor($projectClass)
+                ->constrained((new $projectClass())->getTable())
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

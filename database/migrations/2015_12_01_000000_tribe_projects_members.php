@@ -10,16 +10,17 @@ return new class extends Migration
     public function up()
     {
         $memberClass = config('tribe.models.member');
+        $projectClass = config('tribe.models.project');
 
-        Schema::create('tribe_projects_members', function (Blueprint $table) use ($memberClass){
+        Schema::create('tribe_projects_members', function (Blueprint $table) use ($memberClass, $projectClass){
             $table->id();
             $table->foreignIdFor($memberClass)
                 ->constrained((new $memberClass())->getTable())
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreignIdFor(Project::class)
-                ->constrained((new Project())->getTable())
+            $table->foreignIdFor($projectClass)
+                ->constrained((new $projectClass())->getTable())
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 

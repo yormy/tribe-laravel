@@ -9,14 +9,9 @@ return new class extends Migration
 {
     public function up()
     {
-        $memberClass = config('tribe.models.member');
-        Schema::create('tribe_projects', function (Blueprint $table) use ($memberClass) {
+        $projectClass = config('tribe.models.project');
+        Schema::create((new $projectClass())->getTable(), function (Blueprint $table){
             $table->id();
-            $table->foreignIdFor($memberClass, 'owner_id')
-                ->constrained((new $memberClass())->getTable())
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
-
             $table->string('xid')->unique();
             $table->string('name');
             $table->string('encryption_key')->nullable();
@@ -28,6 +23,7 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('tribe_projects');
+        $projectClass = config('tribe.models.project');
+        Schema::dropIfExists((new $projectClass())->getTable());
     }
 };
