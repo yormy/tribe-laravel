@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('test_members', function (Blueprint $table) {
             $table->id();
             $table->string('email');
             $table->string('encryption_key', 1024);

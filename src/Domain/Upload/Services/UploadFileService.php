@@ -7,10 +7,10 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Yormy\TribeLaravel\Domain\Shared\Models\MemberFile;
 use Yormy\TribeLaravel\Domain\Shared\Repositories\MemberFileRepository;
 use Yormy\TribeLaravel\Domain\Upload\DataObjects\UploadedFileData;
 use Yormy\TribeLaravel\Domain\Upload\Jobs\MoveFileToPersistentDiskJob;
+use Yormy\TribeLaravel\Models\MemberFile;
 
 class UploadFileService
 {

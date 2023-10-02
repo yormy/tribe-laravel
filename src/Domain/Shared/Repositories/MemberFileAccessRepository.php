@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Yormy\TribeLaravel\Domain\Shared\Repositories;
 
-use Yormy\TribeLaravel\Domain\Shared\Models\MemberFile;
-use Yormy\TribeLaravel\Domain\Shared\Models\MemberFileAccess;
+use Yormy\TribeLaravel\Models\MemberFile;
+use Yormy\TribeLaravel\Models\MemberFileAccess;
 
 class MemberFileAccessRepository
 {

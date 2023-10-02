@@ -18,7 +18,7 @@ class FileEncryptionTest extends TestCase
      *
      * @group xxx
      */
-    public function File_ReadFile_Ok(): void
+    public function Dummy(): void
     {
 $this->assertTrue(true);
     }

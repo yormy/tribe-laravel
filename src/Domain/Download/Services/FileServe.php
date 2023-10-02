@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Yormy\TribeLaravel\Domain\Shared\Models\MemberFile;
 use Yormy\TribeLaravel\Domain\Shared\Repositories\MemberFileAccessRepository;
 use Yormy\TribeLaravel\Domain\Upload\DataObjects\Enums\MimeTypeEnum;
 use Yormy\TribeLaravel\Domain\Upload\Services\PdfImageService;
 use Yormy\TribeLaravel\Exceptions\EmbeddingNotAllowedException;
 use Yormy\TribeLaravel\Exceptions\InvalidVariantException;
+use Yormy\TribeLaravel\Models\MemberFile;
 use Yormy\Xid\Services\XidService;
 
 class FileServe

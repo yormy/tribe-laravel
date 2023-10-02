@@ -1,6 +1,6 @@
 <?php
 
-namespace Yormy\TribeLaravel\Domain\Shared\Models;
+namespace Yormy\TribeLaravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -6,7 +6,7 @@ namespace Yormy\TribeLaravel\Domain\Upload\Services;
 
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
-use Yormy\TribeLaravel\Domain\Shared\Models\MemberFile;
+use Yormy\TribeLaravel\Models\MemberFile;
 
 class ThumbnailService
 {

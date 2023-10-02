@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Yormy\TribeLaravel\Domain\Upload\Jobs;
 
 use Illuminate\Support\Facades\Storage;
-use Yormy\TribeLaravel\Domain\Shared\Models\MemberFile;
 use Yormy\TribeLaravel\Domain\Upload\Observers\Events\FileMovedToPersistentEvent;
+use Yormy\TribeLaravel\Models\MemberFile;
 
 class MoveFileToPersistentDiskJob
 {
