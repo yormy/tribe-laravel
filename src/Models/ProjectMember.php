@@ -17,7 +17,11 @@ class ProjectMember extends BaseModel
     public $timestamps = false;
 
     protected $fillable = [
-        'code',
-        'name',
+        'member_id',
+        'project_id',
+        'role_id',
+        'expires_at',
+        'invited_by',
+        'joined_at',
     ];
 }

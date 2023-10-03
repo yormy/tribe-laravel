@@ -9,6 +9,7 @@ use Yormy\TribeLaravel\Models\ProjectMember;
 use Yormy\TribeLaravel\Models\ProjectRole;
 use Yormy\TribeLaravel\Models\TribePermission;
 use Yormy\TribeLaravel\Observers\Events\ProjectMemberAddedEvent;
+use Yormy\TribeLaravel\Observers\Events\ProjectMemberInvitedEvent;
 use Yormy\TribeLaravel\Observers\Events\ProjectMemberRemovedEvent;
 
 class ProjectRepository
@@ -20,18 +21,35 @@ class ProjectRepository
         }
     }
 
+    public function inviteMember(Project $project, $member, $role): void
+    {
+        $userResolverClass = config('tribe.resolvers.user');
+        $data = [
+            'role_id' => $role->id,
+            'invited_by' => $userResolverClass::get(),
+        ];
+        $project->members()->attach($member, $data);
+
+        ProjectMemberInvitedEvent::dispatch($project, $member);
+    }
+
     public function addMember(Project $project, $member, $role): void
     {
-        $project->members()->attach($member, ['role_id' => $role->id]);
+        $userResolverClass = config('tribe.resolvers.user');
+        $data = [
+            'role_id' => $role->id,
+            'invited_by' => 1,//$userResolverClass::get(),
+        ];
+        $project->members()->attach($member, $data);
 
-        event(new ProjectMemberAddedEvent($project, $member));
+        ProjectMemberAddedEvent::dispatch($project, $member);
     }
 
     public function removeMember(Project $project, $member): void
     {
         $project->members()->detach($member);
 
-        event(new ProjectMemberRemovedEvent($project, $member));
+        ProjectMemberRemovedEvent::dispatch($project, $member);
     }
 
     public function isMember(Project $project, $member): bool

@@ -1,16 +1,28 @@
+Accept invite
+Ask for invite ???
+reject invite
+delete parnership / leave tribe
 
-DB, add roles
-factories
+add default roles ?
+
+owner:
+member_add
+member_delete
+project_disable
+project_settings
+
+tc:
+translation_upload
+translation_change
+
+
+test rules
+Scopes
+
 
 
 # TODO
 events on join/leave project
-
-
-Add Members test:
-
-add member to project with role
-assert has role
 
 
 invite non-member

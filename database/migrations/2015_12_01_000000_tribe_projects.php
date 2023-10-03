@@ -14,6 +14,7 @@ return new class extends Migration
             $table->id();
             $table->string('xid')->unique();
             $table->string('name');
+            $table->string('description')->nullable();
             $table->string('encryption_key')->nullable();
             $table->text('api_submit_key')->nullable();
             $table->dateTime('disabled_at')->nullable();

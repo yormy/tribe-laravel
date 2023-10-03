@@ -28,6 +28,10 @@ return new class extends Migration
 
             $table->datetime('expires_at')->nullable();
 
+            $table->unsignedBigInteger('invited_by');
+
+            $table->datetime('joined_at')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

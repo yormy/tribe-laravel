@@ -22,30 +22,30 @@ class ProjectService
         return $roleNames;
     }
 
-    /**
-     * Creating an encrypted project api token.
-     * This allows us to validate the token (decrypt it) without database access
-     * Before validating the token.
-     */
-    public static function generateProjectApiKey(string $key)
-    {
-        $encryptionKey = base64_decode(str_replace('base64:','', $key));
-        $token = Str::random(40);
-        $encrypter = new Encrypter($encryptionKey, 'AES-256-CBC');
-        return $encrypter->encryptString($token);
-    }
-
-    public static function validateProjectApiKey(string $key, $payload): bool
-    {
-        $encryptionKey = base64_decode(str_replace('base64:','', $key));
-        $encrypter = new Encrypter($encryptionKey, 'AES-256-CBC');
-        try {
-            $encrypter->decryptString($payload);
-            return true;
-        } catch (\Exception $e) {
-            return false;
-        }
-    }
+//    /**
+//     * Creating an encrypted project api token.
+//     * This allows us to validate the token (decrypt it) without database access
+//     * Before validating the token.
+//     */
+//    public static function generateProjectApiKey(string $key)
+//    {
+//        $encryptionKey = base64_decode(str_replace('base64:','', $key));
+//        $token = Str::random(40);
+//        $encrypter = new Encrypter($encryptionKey, 'AES-256-CBC');
+//        return $encrypter->encryptString($token);
+//    }
+//
+//    public static function validateProjectApiKey(string $key, $payload): bool
+//    {
+//        $encryptionKey = base64_decode(str_replace('base64:','', $key));
+//        $encrypter = new Encrypter($encryptionKey, 'AES-256-CBC');
+//        try {
+//            $encrypter->decryptString($payload);
+//            return true;
+//        } catch (\Exception $e) {
+//            return false;
+//        }
+//    }
 
     public function updateMembership($project, $member, array $data)
     {
