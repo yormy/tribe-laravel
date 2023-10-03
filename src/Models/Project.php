@@ -24,7 +24,7 @@ class Project extends BaseModel
     {
         $memberClass = config('tribe.models.member');
 
-        return $this->belongsToMany($memberClass, (new ProjectMember())->getTable());
+        return $this->belongsToMany($memberClass, (new ProjectMember())->getTable())->withTimestamps();
     }
 
 
