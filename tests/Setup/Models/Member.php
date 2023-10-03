@@ -22,17 +22,17 @@ class Member extends Authenticatable
         'email',
     ];
 
-    public function projects(): BelongsToMany
-    {
-        $memberClass = config('tribe.models.member');
-
-        return $this->belongsToMany(Project::class, (new ProjectMember())->getTable());
-    }
-
-    public function projectRoles()
-    {
-        return $this->hasManyThrough(ProjectRole::class, Project::class, 'id');
-    }
+//    public function projects(): BelongsToMany
+//    {
+//        $memberClass = config('tribe.models.member');
+//
+//        return $this->belongsToMany(Project::class, (new ProjectMember())->getTable());
+//    }
+//
+//    public function projectRoles()
+//    {
+//        return $this->hasManyThrough(ProjectRole::class, Project::class, 'id');
+//    }
 
 //
 //    public function tribePermissions()

@@ -2,11 +2,9 @@
 
 namespace Yormy\TribeLaravel\Database\Factories;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\ProjectRole;
-use Yormy\Xid\Services\XidService;
 
 class ProjectRoleFactory extends Factory
 {
@@ -15,7 +13,7 @@ class ProjectRoleFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->firstName,
+            'name' => 'default',
         ];
     }
 
