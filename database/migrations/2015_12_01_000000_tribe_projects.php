@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('encryption_key')->nullable();
             $table->text('api_submit_key')->nullable();
             $table->dateTime('disabled_at')->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

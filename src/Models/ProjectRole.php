@@ -5,27 +5,24 @@ namespace Yormy\TribeLaravel\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
+use Yormy\TribeLaravel\Domain\Upload\DataObjects\Enums\MimeTypeEnum;
 use Yormy\Xid\Models\Traits\Xid;
 
-class Project extends BaseModel
+class ProjectRole extends BaseModel
 {
-    use SoftDeletes;
-    use Xid;
     use PackageFactoryTrait;
 
-    protected $table = 'tribe_projects';
+    protected $table = 'tribe_roles';
+
+    public $timestamps = false;
 
     protected $fillable = [
-        'xid',
-        'email',
+        'code',
+        'name',
     ];
 
-    public function members(): BelongsToMany
+    public function permissions()
     {
-        $memberClass = config('tribe.models.member');
-
-        return $this->belongsToMany($memberClass, (new ProjectMember())->getTable());
+        return $this->hasMany(TribePermission::class, 'role_id');
     }
-
-
 }

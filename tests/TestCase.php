@@ -12,7 +12,7 @@ use Yormy\TribeLaravel\Tests\Setup\Routes\TribeLaravelUploadRoutes;
 
 abstract class TestCase extends BaseTestCase
 {
-    use RefreshDatabase;
+    //use RefreshDatabase;
 
     private $useMinio = true;
 
@@ -40,7 +40,7 @@ abstract class TestCase extends BaseTestCase
     protected function copyMigrations()
     {
         $migrations = [
-            '2020_09_12_000300_users.php',
+            '2020_09_12_000300_members.php',
         ];
 
         foreach ($migrations as $migration) {

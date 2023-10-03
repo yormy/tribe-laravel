@@ -1,11 +1,11 @@
 <?php
 
-use Yormy\TribeLaravel\Domain\Shared\Services\Resolvers\IpResolver;
-use Yormy\TribeLaravel\Domain\Shared\Services\Resolvers\UserAgentResolver;
-use Yormy\TribeLaravel\Domain\Shared\Services\Resolvers\UserResolver;
-use Yormy\TribeLaravel\Domain\Upload\DataObjects\Enums\MimeTypeEnum;
-use Yormy\TribeLaravel\Models\Member;
 use Yormy\TribeLaravel\Models\Project;
+use Yormy\TribeLaravel\Models\ProjectRole;
+use Yormy\TribeLaravel\Services\Resolvers\IpResolver;
+use Yormy\TribeLaravel\Services\Resolvers\UserAgentResolver;
+use Yormy\TribeLaravel\Services\Resolvers\UserResolver;
+use Yormy\TribeLaravel\Tests\Setup\Models\Member;
 
 return [
     'resolvers' => [
@@ -23,5 +23,6 @@ return [
     "models" => [
         'member' => Member::class,
         'project' => Project::class,
+        'role' => ProjectRole::class,
     ],
 ];
