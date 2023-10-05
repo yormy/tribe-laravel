@@ -52,7 +52,9 @@ class ProjectRepository
         $allMemberships = $member->tribeMemberships;
 
         foreach ($allMemberships as $membership) {
-            $membership->delete(); // todo select proiject to delete
+            if ($membership->project_id === $project->id) {
+                $membership->delete();
+            }
         }
     }
 

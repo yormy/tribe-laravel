@@ -152,7 +152,6 @@ class RuleTest extends TestCase
      * @test
      *
      * @group tribe-rule
-     * @group xxx
      */
     public function ProjectRule_ApiKey_Pass(): void
     {
@@ -166,7 +165,6 @@ class RuleTest extends TestCase
      * @test
      *
      * @group tribe-rule
-     * @group xxx
      */
     public function ProjectRule_WrongApiKey_Fail(): void
     {
@@ -180,7 +178,6 @@ class RuleTest extends TestCase
      * @test
      *
      * @group tribe-rule
-     * @group xxx
      */
     public function ProjectRule_DisabledProjectApiKey_Fail(): void
     {

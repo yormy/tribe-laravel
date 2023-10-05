@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
 use Yormy\TribeLaravel\Models\Project;
+use Yormy\TribeLaravel\Models\TribeMembership;
 use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Models\TribePermission;
 use Yormy\TribeLaravel\Repositories\ProjectRepository;
@@ -95,6 +96,40 @@ class InviteTest extends TestCase
         $projectRepository->inviteMember($project, $member, $role);
 
         $projectRepository->denyInvite($project, $member);
+
+        $this->assertFalse($projectRepository->pendingInvite($project, $member));
+
+        $this->assertIsNotMember($project, $member);
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-invite
+     * @group xxx
+     */
+    public function ProjectInvited2Projects_DenyOnlyThis_InvitesPresent(): void
+    {
+        $member = $this->createMember();
+        $this->actingAs($member);
+
+        $projectRepository = new ProjectRepository();
+
+        $project = Project::factory()->create();
+        $role = TribeRole::factory()->project($project)->create();
+        $projectRepository->inviteMember($project, $member, $role);
+
+        $project = Project::factory()->create();
+        $projectRepository->inviteMember($project, $member, $role);
+
+        $startPendingInvites = TribeMembership::whereNull('joined_at')->count();
+
+        $projectRepository->denyInvite($project, $member);
+
+        $newPendingInvites = TribeMembership::whereNull('joined_at')->count();
+        $this->assertEquals($startPendingInvites-1, $newPendingInvites);
+
+
 
         $this->assertFalse($projectRepository->pendingInvite($project, $member));
 

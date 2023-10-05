@@ -40,7 +40,6 @@ class RolePermissionTest extends TestCase
      * @test
      *
      * @group tribe-rolepermission
-     * @group xxx
      */
     public function ProjectMembershipRole_IsNotMemberWithOtherRole(): void
     {
