@@ -36,7 +36,7 @@ class ProjectRepository
     {
         return $this->model
             ->where('xid' , $xid)
-            ->whereNull('disabled_at')
+            ->notDisabled()
             ->first();
     }
 
@@ -44,7 +44,7 @@ class ProjectRepository
     {
         return $this->model
             ->where('api_submit_key' , $apiKey)
-            ->whereNull('disabled_at')
+            ->notDisabled()
             ->first();
     }
 
@@ -103,17 +103,34 @@ class ProjectRepository
 
     public function pendingInvite(Project $project, $member): bool
     {
-        $member = $project
-            ->memberships()
-            ->where('member_id', $member->id)
-            ->whereNull('tribe_memberships.deleted_at') // todo table name
-            ->whereNull('joined_at')
-            ->whereDate('expires_at', '>=', Carbon::now()) // to scope ?
-            ->get()
-            ->first();
+        $query = $project->memberships();
+        $query = $this->scopeMember($query, $member);
+        $query = $this->scopeNotJoined($query);
+        $query = $this->scopeNotExpired($query);
+
+        $table = (new TribeMembership())->getTable();
+        $query->whereNull("$table.deleted_at");
+
+        $found = $query->first();
+
+        return (bool)$found;
+    }
+
+    public function pendingInvite2(Project $project, $member): bool
+    {
+        $query = $project->memberships();
+
+        $query = $this->scopeMember($query, $member);
+        $query = $this->scopeJoined($query);
+        $query = $this->scopeNotExpired($query);
+
+        $query = $query->whereNull('tribe_memberships.deleted_at'); // todo table name
+
+        $member = $query->first();
 
         return (bool)$member;
     }
+
 
     public function isMember(Project $project, $member): bool
     {
@@ -121,7 +138,7 @@ class ProjectRepository
         $query = $this->scopeMember($query, $member);
         $query = $this->scopeActive($query);
 
-        $memberCount = $query->get()->count();
+        $memberCount = $query->count();
 
         return (bool)$memberCount;
     }
@@ -145,23 +162,25 @@ class ProjectRepository
 
     public function isMemberWithRole(Project $project, $member, TribeRole $role): bool
     {
-        $member = $project->memberships()
-            ->withPivot('role_id')
-            ->where('member_id', $member->id)
-            ->where('role_id', $role->id)
-            ->get()
-            ->first();
+        $query = $project->memberships();
+        $query = $this->scopeActive($query);
+        $query = $this->scopeMember($query, $member);
 
-        return (bool)$member;
+        $query->withPivot('role_id');
+        $query = $this->scopeRole($query, $role);
+
+        $found = $query->first();
+
+        return (bool)$found;
     }
 
     public function memberHasPermission(Project $project, $member, $permission): bool
     {
         $permsCollection = TribePermission::whereIn('role_id', function ($query) use ($member, $project) {
             $query->select('role_id')
-                ->from('tribe_memberships')
-                ->where('member_id',  $member->id)
-                ->where('project_id',  $project->id);
+                ->from('tribe_memberships');
+            $query = $this->scopeMember($query, $member);
+            $query = $this->scopeProject($query, $project);
         })->pluck('name','id');
 
         return $permsCollection->contains($permission);
