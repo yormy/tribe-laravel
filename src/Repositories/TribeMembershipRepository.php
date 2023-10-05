@@ -16,24 +16,24 @@ use Yormy\TribeLaravel\Observers\Events\ProjectMemberRemovedEvent;
 
 class TribeMembershipRepository
 {
-    public function __construct(private ?TribeMembership $model = null)
-    {
-        if (! $model) {
-            $this->model = new TribeMembership();
-        }
-    }
-
-    public function isMember(Project $project, $member): bool
-    {
-        $x = $this->model
-            ->active()
-            ->project($project)
-            ->member($member)
-            ->get()
-            ->count();
+//    public function __construct(private ?TribeMembership $model = null)
+//    {
+//        if (! $model) {
+//            $this->model = new TribeMembership();
+//        }
+//    }
 //
-//        dd($x);
-
-        return (bool)$member;
-    }
+//    public function isMember(Project $project, $member): bool
+//    {
+//        $x = $this->model
+//            ->active()
+//            ->project($project)
+//            ->member($member)
+//            ->get()
+//            ->count();
+////
+////        dd($x);
+//
+//        return (bool)$member;
+//    }
 }
