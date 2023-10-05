@@ -124,7 +124,8 @@ class ProjectRepository
         $query = $this->scopeJoined($query);
         $query = $this->scopeNotExpired($query);
 
-        $query = $query->whereNull('tribe_memberships.deleted_at'); // todo table name
+        $table = (new TribeMembership())->getTable();
+        $query = $query->whereNull("$table.deleted_at");
 
         $member = $query->first();
 
