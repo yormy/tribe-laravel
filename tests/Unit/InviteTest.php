@@ -27,7 +27,7 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
      */
-    public function Project_InvitedMember_Pending(): void
+    public function TribeMembership_Invited_MemberPending(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -45,7 +45,7 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
      */
-    public function Project_InviteMember_NotMemberYet(): void
+    public function TribeMembership_Invite_NotMemberYet(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -67,7 +67,7 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
      */
-    public function ProjectInvited_Accept_MemberOfProject(): void
+    public function TribeMembership_InviteAccepted_MemberOfProject(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -85,7 +85,7 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
      */
-    public function ProjectInvited2Projects_Accept_MemberOfProject(): void
+    public function TribeMembership2Projects_InviteAccepted_MemberOfProject(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -116,7 +116,7 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
      */
-    public function ProjectMultipleMembership_Leave_NotMember(): void
+    public function TribeMembershipMultipleMembership_LeaveOne_NotMember(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -144,7 +144,7 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
      */
-    public function ProjectInvited_Deny_NotMember(): void
+    public function TribeMembership_InviteDenied_NotMember(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -167,7 +167,7 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
      */
-    public function ProjectInvited2Projects_DenyOnlyThis_InvitesPresent(): void
+    public function TribeMembership2Projects_DenyOnlyThis_InvitesPresent(): void
     {
         $member = $this->createMember();
         $this->actingAs($member);
@@ -188,8 +188,6 @@ class InviteTest extends TestCase
         $newPendingInvites = TribeMembership::whereNull('joined_at')->count();
         $this->assertEquals($startPendingInvites-1, $newPendingInvites);
 
-
-
         $this->assertFalse($projectRepository->pendingInvite($project, $member));
 
         $this->assertIsNotMember($project, $member);
@@ -202,7 +200,7 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
      */
-    public function ProjectMembership_NotMemberOfOtherProject(): void
+    public function TribeMembership_NotMemberOfOtherProject(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -221,7 +219,7 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
      */
-    public function ProjectMembership_OtherMemberNotMemberOfProject(): void
+    public function TribeMembership_OtherMemberNotMemberOfProject(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -238,7 +236,7 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
     */
-    public function ProjectMemberhsip_Expired_NotMember(): void
+    public function TribeMembership_Expired_NotMember(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -254,7 +252,7 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
      */
-    public function ProjectMembership_Leave_NotMember(): void
+    public function TribeMembership_Leave_NotMember(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();

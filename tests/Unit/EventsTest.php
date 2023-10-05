@@ -36,7 +36,7 @@ class EventsTest extends TestCase
      * @group tribe-events
      * @group xxx
      */
-    public function TribeMembership_Invited_Event(): void
+    public function TribeMembership_Invite_Event(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();

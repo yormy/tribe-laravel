@@ -22,7 +22,7 @@ class RolePermissionTest extends TestCase
      *
      * @group tribe-rolepermission
      */
-    public function ProjectMembershipRole_IsMemberWithRole(): void
+    public function TribeMembershipRole_IsMemberWithRole(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -41,7 +41,7 @@ class RolePermissionTest extends TestCase
      *
      * @group tribe-rolepermission
      */
-    public function ProjectMembershipRole_IsNotMemberWithOtherRole(): void
+    public function TribeMembershipRole_IsNotMemberWithOtherRole(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -61,7 +61,7 @@ class RolePermissionTest extends TestCase
      *
      * @group tribe-rolepermission
      */
-    public function ProjectMembership_HasPermission(): void
+    public function TribeMembership_HasPermission(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -82,7 +82,7 @@ class RolePermissionTest extends TestCase
      *
      * @group tribe-rolepermission
      */
-    public function ProjectMembership_HasNotPermission(): void
+    public function TribeMembership_HasNotPermission(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();

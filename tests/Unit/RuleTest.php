@@ -2,21 +2,17 @@
 
 namespace Yormy\TribeLaravel\Tests\Unit;
 
-use Illuminate\Contracts\Validation\Rule;
 use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\TribePermission;
 use Yormy\TribeLaravel\Models\TribeRole;
-use Yormy\TribeLaravel\Repositories\ProjectRepository;
-use Yormy\TribeLaravel\Rules\ProjectApiKeyRule;
-use Yormy\TribeLaravel\Rules\DummyRule;
 use Yormy\TribeLaravel\Rules\MemberOfProjectRule;
 use Yormy\TribeLaravel\Rules\ProjectActiveRule;
+use Yormy\TribeLaravel\Rules\ProjectApiKeyRule;
 use Yormy\TribeLaravel\Rules\ProjectExistsRule;
 use Yormy\TribeLaravel\Rules\ProjectPermissionRule;
 use Yormy\TribeLaravel\Tests\TestCase;
 use Yormy\TribeLaravel\Tests\Traits\MemberTrait;
 use Yormy\TribeLaravel\Tests\Unit\Traits\AssertInviteTrait;
-use Illuminate\Contracts\Validation\ValidationRule;
 use Yormy\TribeLaravel\Tests\Unit\Traits\AssertRuleTrait;
 
 class RuleTest extends TestCase
@@ -30,7 +26,7 @@ class RuleTest extends TestCase
      *
      * @group tribe-rule
      */
-    public function ProjectRule_MemberOfProject_Pass(): void
+    public function TribeMembershipRule_MemberOfProject_Pass(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -46,7 +42,7 @@ class RuleTest extends TestCase
      *
      * @group tribe-rule
      */
-    public function ProjectRule_MemberOfProject_Fail(): void
+    public function TribeMembershipRule_MemberOfProject_Fail(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -63,7 +59,7 @@ class RuleTest extends TestCase
      *
      * @group tribe-rule
      */
-    public function ProjectRule_ProjectExists_Pass(): void
+    public function TribeMembershipRule_ProjectExists_Pass(): void
     {
         $project = Project::factory()->create();
 
@@ -76,7 +72,7 @@ class RuleTest extends TestCase
      *
      * @group tribe-rule
      */
-    public function ProjectRule_ProjectExists_Fail(): void
+    public function TribeMembershipRule_ProjectExists_Fail(): void
     {
         Project::factory()->create();
 
@@ -89,7 +85,7 @@ class RuleTest extends TestCase
      *
      * @group tribe-rule
      */
-    public function ProjectRule_ProjectActive_Pass(): void
+    public function TribeMembershipRule_ProjectActive_Pass(): void
     {
         $project = Project::factory()->create();
 
@@ -102,7 +98,7 @@ class RuleTest extends TestCase
      *
      * @group tribe-rule
      */
-    public function ProjectRule_ProjectActive_Fail(): void
+    public function TribeMembershipRule_ProjectActive_Fail(): void
     {
         $project = Project::factory()->disabled()->create();
 
@@ -115,7 +111,7 @@ class RuleTest extends TestCase
      *
      * @group tribe-rule
      */
-    public function ProjectRule_ProjectPermission_Pass(): void
+    public function TribeMembershipRule_ProjectPermission_Pass(): void
     {
         $permissionName = 'add_member';
         $member = $this->createMember();
@@ -134,7 +130,7 @@ class RuleTest extends TestCase
      *
      * @group tribe-rule
      */
-    public function ProjectRule_ProjectPermission_Fail(): void
+    public function TribeMembershipRule_ProjectPermission_Fail(): void
     {
         $permissionName = 'add_member';
         $member = $this->createMember();
@@ -153,7 +149,7 @@ class RuleTest extends TestCase
      *
      * @group tribe-rule
      */
-    public function ProjectRule_ApiKey_Pass(): void
+    public function TribeMembershipRule_ApiKey_Pass(): void
     {
         $project = Project::factory()->create();
 
@@ -166,7 +162,7 @@ class RuleTest extends TestCase
      *
      * @group tribe-rule
      */
-    public function ProjectRule_WrongApiKey_Fail(): void
+    public function TribeMembershipRule_WrongApiKey_Fail(): void
     {
         $project = Project::factory()->create();
 
@@ -179,7 +175,7 @@ class RuleTest extends TestCase
      *
      * @group tribe-rule
      */
-    public function ProjectRule_DisabledProjectApiKey_Fail(): void
+    public function TribeMembershipRule_DisabledProjectApiKey_Fail(): void
     {
         $project = Project::factory()->disabled()->create();
 
