@@ -10,9 +10,8 @@ use Illuminate\Support\Collection;
 use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\Scopes\MembershipScopeTrait;
 use Yormy\TribeLaravel\Models\TribeMembership;
-use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Models\TribePermission;
-use Yormy\TribeLaravel\Observers\Events\ProjectMemberAddedEvent;
+use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Observers\Events\ProjectMemberInvitedEvent;
 use Yormy\TribeLaravel\Observers\Events\ProjectMemberRemovedEvent;
 
@@ -53,7 +52,7 @@ class ProjectRepository
         $allMemberships = $member->tribeMemberships;
 
         foreach ($allMemberships as $membership) {
-            $membership->delete(); // select proiject to delete
+            $membership->delete(); // todo select proiject to delete
         }
     }
 
@@ -186,16 +185,4 @@ class ProjectRepository
 
         return $permsCollection->contains($permission);
     }
-
-    public function isOwner(Project $project, $member): bool
-    {
-        $member = $project->memberships()
-            ->withPivot('role_id')
-            ->where('member_id', $member->id)
-            ->get()
-            ->first();
-        dd($member);
-        return true;
-    }
-
 }
