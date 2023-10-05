@@ -18,31 +18,14 @@ class ProjectFactory extends Factory
             'name' => $this->faker->firstName,
         ];
     }
-//
-//    public function marketing(): Factory
-//    {
-//        return $this->state(function (array $attributes) {
-//            return [
-//                'type' => UserTermType::MARKETING,
-//            ];
-//        });
-//    }
-//
-//    public function general(): Factory
-//    {
-//        return $this->state(function (array $attributes) {
-//            return [
-//                'type' => UserTermType::GENERAL,
-//            ];
-//        });
-//    }
-//
-//    public function active(): Factory
-//    {
-//        return $this->state(function (array $attributes) {
-//            return [
-//                'activated_at' => Carbon::now(),
-//            ];
-//        });
-//    }
+
+    public function disabled(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'disabled_at' => Carbon::now()->subHours(2)
+            ];
+        });
+    }
+
 }

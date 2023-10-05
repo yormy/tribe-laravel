@@ -27,6 +27,19 @@ class ProjectRepository
         }
     }
 
+    public function findOneByXid(string $xid): ?Project
+    {
+        return $this->model->where('xid' , $xid)->first();
+    }
+
+    public function findOneActiveByXid(string $xid): ?Project
+    {
+        return $this->model
+            ->where('xid' , $xid)
+            ->whereNull('disabled_at')
+            ->first();
+    }
+
     public function denyInvite(Project $project, $member): void
     {
         $allMemberships = $member->tribeMemberships;
