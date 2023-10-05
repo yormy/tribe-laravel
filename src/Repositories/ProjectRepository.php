@@ -6,6 +6,7 @@ namespace Yormy\TribeLaravel\Repositories;
 
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\Scopes\MembershipScopeTrait;
 use Yormy\TribeLaravel\Models\TribeMembership;
@@ -115,6 +116,15 @@ class ProjectRepository
 
         return (bool)$memberCount;
     }
+
+    public function allActiveMembers(Project $project): Collection
+    {
+        $query = $project->memberships();
+        $query = $this->scopeActive($query);
+
+        return $query->get();
+    }
+
 
     public function isMemberWithRole(Project $project, $member, TribeRole $role): bool
     {

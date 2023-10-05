@@ -14,7 +14,7 @@ use Yormy\TribeLaravel\Tests\Setup\Models\Member;
 use Yormy\TribeLaravel\Tests\TestCase;
 use Yormy\TribeLaravel\Tests\Traits\MemberTrait;
 
-class InviteTest extends TestCase
+class RestartTest extends TestCase
 {
     use MemberTrait;
 
@@ -22,8 +22,9 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
+     * @group xxx
      */
-    public function Project_InviteMember_NotMemberYes(): void
+    public function Project_InviteMember_NotMemberYet(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
@@ -34,6 +35,50 @@ class InviteTest extends TestCase
         $projectRepository->inviteMember($project, $member, $role);
 
         $isMember = $projectRepository->isMember($project, $member);
+        $this->assertFalse($isMember);
+
+        $allActiveMembers = $projectRepository->allActiveMembers($project);
+        $this->assertCount(0, $allActiveMembers);
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-invite
+     * @group xxx
+     */
+    public function ProjectInvitedMember_AcceptMembership_MemberOfProject(): void
+    {
+        $member = $this->createMember();
+        $project = Project::factory()->create();
+        $role = TribeRole::factory()->project($project)->create();
+
+        $this->inviteAndAccept($project, $member);
+
+        $projectRepository = new ProjectRepository();
+        $isMember = $projectRepository->isMember($project, $member);
+        $this->assertTrue($isMember);
+
+        $allActiveMembers = $projectRepository->allActiveMembers($project);
+        $this->assertCount(1, $allActiveMembers);
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-invite
+     * @group xxx
+     */
+    public function ProjectInvitedMember_AcceptMembership_NotMemberOfOtherProject(): void
+    {
+        $member = $this->createMember();
+        $project = Project::factory()->create();
+        $role = TribeRole::factory()->project($project)->create();
+        $this->inviteAndAccept($project, $member);
+
+        $projectRepository = new ProjectRepository();
+        $project2 = Project::factory()->create();
+        $isMember = $projectRepository->isMember($project2, $member);
         $this->assertFalse($isMember);
     }
 
@@ -41,25 +86,26 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
+     * @group xxx
      */
-    public function ProjectInvitedMember_Accept_Member(): void
+    public function ProjectInvitedMember_AcceptMembership_OtherMemberNotMemberOfProject(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
         $role = TribeRole::factory()->project($project)->create();
+        $this->inviteAndAccept($project, $member);
 
         $projectRepository = new ProjectRepository();
-        $this->actingAs($member);
-        $projectRepository->inviteMember($project, $member, $role);
 
-        $isMember = $projectRepository->isMember($project, $member);
+        $member2 = $this->createMember();
+        $isMember = $projectRepository->isMember($project, $member2);
         $this->assertFalse($isMember);
-
-        $projectRepository->acceptInvite($project, $member);
-
-        $isMember = $projectRepository->isMember($project, $member);
-        $this->assertTrue($isMember);
     }
+
+// has 1 project
+// has 1 member
+
+
 
     /**
      * @test
@@ -94,7 +140,7 @@ class InviteTest extends TestCase
         $member = $this->createMember();
         $project = Project::factory()->create();
         $role = TribeRole::factory()->project($project)->create();
-        $this->addMember($project, $member);
+        $this->inviteAndAccept($project, $member);
 
         $projectRepository = new ProjectRepository();
 
@@ -117,7 +163,7 @@ class InviteTest extends TestCase
         $member = $this->createMember();
         $project = Project::factory()->create();
         $role = TribeRole::factory()->project($project)->create();
-        $this->addMember($project, $member);
+        $this->inviteAndAccept($project, $member);
 
         $projectRepository = new ProjectRepository();
         $this->assertFalse($projectRepository->pendingInvite($project, $member));
@@ -158,7 +204,7 @@ class InviteTest extends TestCase
         $member = $this->createMember();
         $project = Project::factory()->create();
         $role = TribeRole::factory()->project($project)->create();
-        $this->addMember($project, $member);
+        $this->inviteAndAccept($project, $member);
 
         $projectRepository = new ProjectRepository();
         $isMember = $projectRepository->isMember($project, $member);
@@ -175,7 +221,7 @@ class InviteTest extends TestCase
     {
         $memberOriginal = $this->createMember();
         $project = Project::factory()->create();
-        $this->addMember($project, $memberOriginal);
+        $this->inviteAndAccept($project, $memberOriginal);
 
         $memberNew = $this->createMember();
         $projectRepository = new ProjectRepository();
@@ -193,7 +239,7 @@ class InviteTest extends TestCase
     {
         $memberOriginal = $this->createMember();
         $project = Project::factory()->create();
-        $this->addMember($project, $memberOriginal);
+        $this->inviteAndAccept($project, $memberOriginal);
 
         $memberNew = $this->createMember();
 
@@ -204,7 +250,7 @@ class InviteTest extends TestCase
 
     // ---------- HELPERS ----------
 
-    private function addMember($project, $member)
+    private function inviteAndAccept($project, $member)
     {
         $role = TribeRole::factory()->project($project)->create();
 
