@@ -12,7 +12,7 @@ return new class extends Migration
         $memberClass = config('tribe.models.member');
         $projectClass = config('tribe.models.project');
 
-        Schema::create('tribe_members', function (Blueprint $table) use ($memberClass, $projectClass){
+        Schema::create('tribe_memberships', function (Blueprint $table) use ($memberClass, $projectClass){
             $table->id();
             $table->foreignIdFor($memberClass)
                 ->constrained((new $memberClass())->getTable())
@@ -39,6 +39,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('tribe_projects_members');
+        Schema::dropIfExists('tribe_memberships');
     }
 };

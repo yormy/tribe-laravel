@@ -1,8 +1,3 @@
-Accept invite
-Ask for invite ???
-reject invite
-delete parnership / leave tribe
-
 add default roles ?
 
 owner:
@@ -28,11 +23,6 @@ events on join/leave project
 invite non-member
 assert event fired / or in package email ? / disabalable ?
 
-invite member
-assert member has invite
-
-invited member
-accept invite
 assert has project access
 
 accepted invite

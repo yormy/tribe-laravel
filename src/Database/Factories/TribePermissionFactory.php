@@ -5,7 +5,7 @@ namespace Yormy\TribeLaravel\Database\Factories;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Yormy\TribeLaravel\Models\Project;
-use Yormy\TribeLaravel\Models\ProjectRole;
+use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Models\TribePermission;
 use Yormy\Xid\Services\XidService;
 
@@ -20,7 +20,7 @@ class TribePermissionFactory extends Factory
         ];
     }
 
-    public function role(ProjectRole $role): Factory
+    public function role(TribeRole $role): Factory
     {
         return $this->state(function (array $attributes) use ($role) {
             return [

@@ -4,7 +4,7 @@ namespace Yormy\TribeLaravel\Models;
 
 use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
 
-class ProjectRole extends BaseModel
+class TribeRole extends BaseModel
 {
     use PackageFactoryTrait;
 

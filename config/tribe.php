@@ -1,7 +1,7 @@
 <?php
 
 use Yormy\TribeLaravel\Models\Project;
-use Yormy\TribeLaravel\Models\ProjectRole;
+use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Services\Resolvers\IpResolver;
 use Yormy\TribeLaravel\Services\Resolvers\UserAgentResolver;
 use Yormy\TribeLaravel\Services\Resolvers\UserResolver;
@@ -16,6 +16,8 @@ return [
     | It allows us to verify the api token passed in without having to go to the database
     */
     "api_encryption_key" => "base64:OsDjKLg2PRnIUqQQbN7Jw/KjzQ8AOmB5YQGR/F/5yTY=",
+
+    "default_expire_membership_months" => 12,
 
     /*
     |--------------------------------------------------------------------------
@@ -38,6 +40,6 @@ return [
     "models" => [
         'member' => Member::class,
         'project' => Project::class,
-        'role' => ProjectRole::class,
+        'role' => TribeRole::class,
     ],
 ];

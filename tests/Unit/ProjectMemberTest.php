@@ -4,7 +4,7 @@ namespace Yormy\TribeLaravel\Tests\Unit;
 
 use Illuminate\Support\Str;
 use Yormy\TribeLaravel\Models\Project;
-use Yormy\TribeLaravel\Models\ProjectRole;
+use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Models\TribePermission;
 use Yormy\TribeLaravel\Repositories\ProjectRepository;
 use Yormy\TribeLaravel\Tests\TestCase;
@@ -24,7 +24,7 @@ class ProjectMemberTest extends TestCase
         $member = $this->createMember();
         $project = Project::factory()->create();
 
-        $role = ProjectRole::factory()->project($project)->create();
+        $role = TribeRole::factory()->project($project)->create();
 
         $projectRepository = new ProjectRepository();
         $projectRepository->addMember($project, $member, $role);
@@ -43,7 +43,7 @@ class ProjectMemberTest extends TestCase
         $member = $this->createMember();
         $project = Project::factory()->create();
 
-        $role = ProjectRole::factory()->project($project)->create();
+        $role = TribeRole::factory()->project($project)->create();
 
         $projectRepository = new ProjectRepository();
         $projectRepository->addMember($project, $member, $role);
@@ -63,12 +63,12 @@ class ProjectMemberTest extends TestCase
         $member = $this->createMember();
         $project = Project::factory()->create();
 
-        $role = ProjectRole::factory()->project($project)->create();
+        $role = TribeRole::factory()->project($project)->create();
 
         $projectRepository = new ProjectRepository();
         $projectRepository->addMember($project, $member, $role);
 
-        $newRole = ProjectRole::factory()->project($project)->create();
+        $newRole = TribeRole::factory()->project($project)->create();
         $memberHasRole = $projectRepository->isMemberWithRole($project, $member, $newRole);
         $this->assertFalse($memberHasRole);
     }
@@ -83,7 +83,7 @@ class ProjectMemberTest extends TestCase
         $member = $this->createMember();
         $project = Project::factory()->create();
 
-        $role = ProjectRole::factory()->project($project)->create();
+        $role = TribeRole::factory()->project($project)->create();
 
         $projectRepository = new ProjectRepository();
         $projectRepository->addMember($project, $member, $role);
@@ -97,7 +97,6 @@ class ProjectMemberTest extends TestCase
      * @test
      *
      * @group tribe-add
-     * @group xxx
      */
     public function ProjectMember_HasPermission(): void
     {
@@ -105,7 +104,7 @@ class ProjectMemberTest extends TestCase
         $project = Project::factory()->create();
         $permissionName = Str::random(5);
 
-        $role = ProjectRole::factory()->project($project)->create();
+        $role = TribeRole::factory()->project($project)->create();
         TribePermission::factory()->role($role)->create(['name' => $permissionName]);
 
         $projectRepository = new ProjectRepository();
@@ -119,7 +118,6 @@ class ProjectMemberTest extends TestCase
      * @test
      *
      * @group tribe-add
-     * @group xxx
      */
     public function ProjectMember_HasNotPermission(): void
     {
@@ -127,7 +125,7 @@ class ProjectMemberTest extends TestCase
         $project = Project::factory()->create();
         $permissionName = Str::random(5);
 
-        $role = ProjectRole::factory()->project($project)->create();
+        $role = TribeRole::factory()->project($project)->create();
         TribePermission::factory()->role($role)->create(['name' => $permissionName]);
 
         $projectRepository = new ProjectRepository();

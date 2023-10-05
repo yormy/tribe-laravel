@@ -20,11 +20,11 @@ class Project extends BaseModel
         'email',
     ];
 
-    public function members(): BelongsToMany
+    public function memberships(): BelongsToMany
     {
         $memberClass = config('tribe.models.member');
 
-        return $this->belongsToMany($memberClass, (new ProjectMember())->getTable())->withTimestamps();
+        return $this->belongsToMany($memberClass, (new TribeMembership())->getTable())->withTimestamps();
     }
 
 

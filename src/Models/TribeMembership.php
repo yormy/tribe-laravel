@@ -5,14 +5,17 @@ namespace Yormy\TribeLaravel\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
 use Yormy\TribeLaravel\Domain\Upload\DataObjects\Enums\MimeTypeEnum;
+use Yormy\TribeLaravel\Models\Scopes\DateScopeTrait;
+use Yormy\TribeLaravel\Models\Scopes\MembershipScopeTrait;
 use Yormy\Xid\Models\Traits\Xid;
 
-class ProjectMember extends BaseModel
+class TribeMembership extends BaseModel
 {
     use SoftDeletes;
     use PackageFactoryTrait;
+    use MembershipScopeTrait;
 
-    protected $table = 'tribe_members';
+    protected $table = 'tribe_memberships';
 
     public $timestamps = false;
 
