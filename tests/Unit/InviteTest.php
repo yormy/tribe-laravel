@@ -13,10 +13,12 @@ use Yormy\TribeLaravel\Repositories\TribeMembershipRepository;
 use Yormy\TribeLaravel\Tests\Setup\Models\Member;
 use Yormy\TribeLaravel\Tests\TestCase;
 use Yormy\TribeLaravel\Tests\Traits\MemberTrait;
+use Yormy\TribeLaravel\Tests\Unit\Traits\AssertInviteTrait;
 
 class InviteTest extends TestCase
 {
     use MemberTrait;
+    use AssertInviteTrait;
 
     /**
      * @test
@@ -79,14 +81,6 @@ class InviteTest extends TestCase
 
         $this->assertActiveProjects($member, 1);
     }
-
-    private function assertActiveProjects($member, int $count)
-    {
-        $projectRepository = new ProjectRepository();
-        $allActiveProjects = $projectRepository->allActiveProjects($member);
-        $this->assertCount($count, $allActiveProjects);
-    }
-
 
     /**
      * @test
@@ -183,35 +177,4 @@ class InviteTest extends TestCase
         $this->assertIsNotMember($project, $member);
     }
 
-    // ---------- HELPERS ----------
-
-    private function assertIsNotMember(Project $project, $member)
-    {
-        $projectRepository = new ProjectRepository();
-
-        $isMember = $projectRepository->isMember($project, $member);
-        $this->assertFalse($isMember);
-
-        $this->assertActiveProjects($member, 0);
-    }
-
-    private function assertIsMember(Project $project, $member)
-    {
-        $projectRepository = new ProjectRepository();
-
-        $isMember = $projectRepository->isMember($project, $member);
-        $this->assertTrue($isMember);
-
-        $this->assertActiveProjects($member, 1);
-    }
-
-    private function inviteAndAccept($project, $member)
-    {
-        $role = TribeRole::factory()->project($project)->create();
-
-        $projectRepository = new ProjectRepository();
-        $this->actingAs($member);
-        $projectRepository->inviteMember($project, $member, $role);
-        $projectRepository->acceptInvite($project, $member);
-    }
 }

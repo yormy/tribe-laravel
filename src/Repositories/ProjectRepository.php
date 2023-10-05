@@ -73,18 +73,6 @@ class ProjectRepository
         ProjectMemberInvitedEvent::dispatch($project, $member);
     }
 
-    public function addMember(Project $project, $member, $role): void
-    {
-        $userResolverClass = config('tribe.resolvers.user');
-        $data = [
-            'role_id' => $role->id,
-            'invited_by' => 1,//$userResolverClass::get(),
-        ];
-        $project->memberships()->attach($member, $data);
-
-        ProjectMemberAddedEvent::dispatch($project, $member);
-    }
-
     public function removeMember(Project $project, $member): void
     {
         $project->memberships()->detach($member);
