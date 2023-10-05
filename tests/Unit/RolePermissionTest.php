@@ -11,7 +11,7 @@ use Yormy\TribeLaravel\Tests\TestCase;
 use Yormy\TribeLaravel\Tests\Traits\MemberTrait;
 use Yormy\TribeLaravel\Tests\Unit\Traits\AssertInviteTrait;
 
-class ProjectMemberTest extends TestCase
+class RolePermissionTest extends TestCase
 {
     use MemberTrait;
     use AssertInviteTrait;
@@ -20,8 +20,7 @@ class ProjectMemberTest extends TestCase
     /**
      * @test
      *
-     * @group tribe-add
-     * @group xxx
+     * @group tribe-rolepermission
      */
     public function ProjectMembershipRole_IsMemberWithRole(): void
     {
@@ -40,8 +39,7 @@ class ProjectMemberTest extends TestCase
     /**
      * @test
      *
-     * @group tribe-add
-     * @group xxx
+     * @group tribe-rolepermission
      */
     public function ProjectMembershipRole_IsNotMemberWithOtherRole(): void
     {
@@ -61,8 +59,7 @@ class ProjectMemberTest extends TestCase
     /**
      * @test
      *
-     * @group tribe-add
-     * @group xxx
+     * @group tribe-rolepermission
      */
     public function ProjectMembership_HasPermission(): void
     {
@@ -83,8 +80,7 @@ class ProjectMemberTest extends TestCase
     /**
      * @test
      *
-     * @group tribe-add
-     * @group xxx
+     * @group tribe-rolepermission
      */
     public function ProjectMembership_HasNotPermission(): void
     {
@@ -101,5 +97,4 @@ class ProjectMemberTest extends TestCase
         $memberHasRole = $projectRepository->memberHasPermission($project, $member, 'missing_permission_name');
         $this->assertFalse($memberHasRole);
     }
-
 }

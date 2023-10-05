@@ -24,7 +24,6 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
-     * @group xxx
      */
     public function Project_InvitedMember_Pending(): void
     {
@@ -43,7 +42,6 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
-     * @group xxx
      */
     public function Project_InviteMember_NotMemberYet(): void
     {
@@ -66,7 +64,6 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
-     * @group xxx
      */
     public function ProjectInvited_Accept_MemberOfProject(): void
     {
@@ -86,7 +83,6 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
-     * @group xxx
      */
     public function ProjectInvited_Deny_NotMember(): void
     {
@@ -109,7 +105,6 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
-     * @group xxx
      */
     public function ProjectMembership_NotMemberOfOtherProject(): void
     {
@@ -129,7 +124,6 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
-     * @group xxx
      */
     public function ProjectMembership_OtherMemberNotMemberOfProject(): void
     {
@@ -147,7 +141,6 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
-     * @group xxx
     */
     public function ProjectMemberhsip_Expired_NotMember(): void
     {
@@ -163,7 +156,6 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
-     * @group xxx
      */
     public function ProjectMembership_Leave_NotMember(): void
     {
