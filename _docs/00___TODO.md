@@ -12,7 +12,7 @@ translation_upload
 translation_change
 
 Scopes
-test events
+normalize test names prefix
 
 
 # TODO
