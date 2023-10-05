@@ -39,6 +39,9 @@ class RestartTest extends TestCase
 
         $allActiveMembers = $projectRepository->allActiveMembers($project);
         $this->assertCount(0, $allActiveMembers);
+
+        $allActiveProjects = $projectRepository->allActiveProjects($member);
+        $this->assertCount(0, $allActiveProjects);
     }
 
     /**
@@ -61,6 +64,9 @@ class RestartTest extends TestCase
 
         $allActiveMembers = $projectRepository->allActiveMembers($project);
         $this->assertCount(1, $allActiveMembers);
+
+        $allActiveProjects = $projectRepository->allActiveProjects($member);
+        $this->assertCount(1, $allActiveProjects);
     }
 
     /**
@@ -80,6 +86,9 @@ class RestartTest extends TestCase
         $project2 = Project::factory()->create();
         $isMember = $projectRepository->isMember($project2, $member);
         $this->assertFalse($isMember);
+
+        $allActiveProjects = $projectRepository->allActiveProjects($member);
+        $this->assertCount(1, $allActiveProjects);
     }
 
     /**
@@ -100,10 +109,18 @@ class RestartTest extends TestCase
         $member2 = $this->createMember();
         $isMember = $projectRepository->isMember($project, $member2);
         $this->assertFalse($isMember);
+
+        $allActiveProjects = $projectRepository->allActiveProjects($member);
+        $this->assertCount(1, $allActiveProjects);
+
+        $allActiveProjects = $projectRepository->allActiveProjects($member2);
+        $this->assertCount(0, $allActiveProjects);
     }
 
-// has 1 project
-// has 1 member
+
+
+
+
 
 
 

@@ -125,6 +125,14 @@ class ProjectRepository
         return $query->get();
     }
 
+    public function allActiveProjects($member): Collection
+    {
+        $query = TribeMembership::where('member_id', $member->id);
+        $query = $this->scopeActive($query);
+
+        return $query->get();
+    }
+
 
     public function isMemberWithRole(Project $project, $member, TribeRole $role): bool
     {
