@@ -12,13 +12,9 @@ translation_upload
 translation_change
 
 Scopes
-normalize test names prefix
 
 
 # TODO
-events on join/leave project
-
-invite non-member
 assert event fired / or in package email ? / disabalable ?
 
 change role
@@ -27,10 +23,6 @@ assert role changed
 api
 access without api key not possible
 access with correct api key only
-
-generate api key
-
-
 
 # CLEANUP
 - pint
