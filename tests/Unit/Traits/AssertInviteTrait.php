@@ -17,7 +17,9 @@ trait AssertInviteTrait
         $projectRepository = new ProjectRepository();
         $this->actingAs($member);
         $projectRepository->inviteMember($project, $member, $role);
+        $member->refresh();
         $projectRepository->acceptInvite($project, $member);
+        $member->refresh();
     }
 
     protected function assertIsNotMember(Project $project, $member)
@@ -26,8 +28,6 @@ trait AssertInviteTrait
 
         $isMember = $projectRepository->isMember($project, $member);
         $this->assertFalse($isMember);
-
-        $this->assertActiveProjects($member, 0);
     }
 
     protected function assertIsMember(Project $project, $member)
@@ -36,8 +36,6 @@ trait AssertInviteTrait
 
         $isMember = $projectRepository->isMember($project, $member);
         $this->assertTrue($isMember);
-
-        $this->assertActiveProjects($member, 1);
     }
 
 

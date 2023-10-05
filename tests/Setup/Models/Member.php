@@ -24,8 +24,6 @@ class Member extends Authenticatable
 
     public function tribeMemberships()
     {
-        $memberClass = config('tribe.models.member');
-
         return $this->hasMany(TribeMembership::class);
     }
 

@@ -4,6 +4,7 @@ namespace Yormy\TribeLaravel\Tests\Unit;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\TribeMembership;
@@ -73,11 +74,10 @@ class InviteTest extends TestCase
         $this->inviteAndAccept($project, $member);
 
         $this->assertIsMember($project, $member);
+        $this->assertActiveProjects($member, 1);
 
         $projectRepository = new ProjectRepository();
         $this->assertFalse($projectRepository->pendingInvite($project, $member));
-
-        $this->assertActiveProjects($member, 1);
     }
 
     /**
@@ -105,11 +105,43 @@ class InviteTest extends TestCase
         $this->assertEquals($startPendingInvites-1, $newPendingInvites);
 
         $this->assertIsMember($project, $member);
+        $this->assertActiveProjects($member, 1);
 
         $projectRepository = new ProjectRepository();
         $this->assertFalse($projectRepository->pendingInvite($project, $member));
+    }
 
+    /**
+     * @test
+     *
+     * @group tribe-invite
+     * @group xxx
+     */
+    public function ProjectMultipleMembership_Leave_NotMember(): void
+    {
+        Schema::disableForeignKeyConstraints();
+        TribeMembership::truncate();
+        Member::truncate();
+        Project::truncate();
+        $member = $this->createMember();
+        $project = Project::factory()->create();
+        $this->inviteAndAccept($project, $member);
+
+        $project = Project::factory()->create();
+        $this->inviteAndAccept($project, $member);
+
+        $startActiveMemberships = TribeMembership::whereNull('deleted_at')->count();
+
+        $projectRepository = new ProjectRepository();
+        $projectRepository->leave($project, $member);
+
+        $newActiveMemberships = TribeMembership::whereNull('deleted_at')->count();
+
+        $this->assertEquals($startActiveMemberships-1, $newActiveMemberships);
+
+        $this->assertIsNotMember($project, $member);
         $this->assertActiveProjects($member, 1);
+
     }
 
     /**
@@ -132,13 +164,13 @@ class InviteTest extends TestCase
         $this->assertFalse($projectRepository->pendingInvite($project, $member));
 
         $this->assertIsNotMember($project, $member);
+        $this->assertActiveProjects($member, 0);
     }
 
     /**
      * @test
      *
      * @group tribe-invite
-     * @group xxx
      */
     public function ProjectInvited2Projects_DenyOnlyThis_InvitesPresent(): void
     {
@@ -166,6 +198,8 @@ class InviteTest extends TestCase
         $this->assertFalse($projectRepository->pendingInvite($project, $member));
 
         $this->assertIsNotMember($project, $member);
+
+        $this->assertActiveProjects($member, 0);
     }
 
     /**
@@ -217,6 +251,7 @@ class InviteTest extends TestCase
 
         Carbon::setTestNow(CarbonImmutable::now()->addYears(2));
         $this->assertIsNotMember($project, $member);
+        $this->assertActiveProjects($member, 0);
     }
 
     /**
@@ -234,6 +269,7 @@ class InviteTest extends TestCase
         $projectRepository->leave($project, $member);
 
         $this->assertIsNotMember($project, $member);
+        $this->assertActiveProjects($member, 0);
     }
 
 }
