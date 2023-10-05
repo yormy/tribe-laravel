@@ -10,7 +10,7 @@ use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\TribeMembership;
 use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Models\TribePermission;
-use Yormy\TribeLaravel\Observers\Events\ProjectMemberAddedEvent;
+use Yormy\TribeLaravel\Observers\Events\ProjectMemberInviteAcceptedEvent;
 use Yormy\TribeLaravel\Observers\Events\ProjectMemberInvitedEvent;
 use Yormy\TribeLaravel\Observers\Events\ProjectMemberRemovedEvent;
 

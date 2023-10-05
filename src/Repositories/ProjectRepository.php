@@ -12,6 +12,9 @@ use Yormy\TribeLaravel\Models\Scopes\MembershipScopeTrait;
 use Yormy\TribeLaravel\Models\TribeMembership;
 use Yormy\TribeLaravel\Models\TribePermission;
 use Yormy\TribeLaravel\Models\TribeRole;
+use Yormy\TribeLaravel\Observers\Events\MemberLeftProjectEvent;
+use Yormy\TribeLaravel\Observers\Events\ProjectMemberInviteAcceptedEvent;
+use Yormy\TribeLaravel\Observers\Events\ProjectMemberInviteDeniedEvent;
 use Yormy\TribeLaravel\Observers\Events\ProjectMemberInvitedEvent;
 use Yormy\TribeLaravel\Observers\Events\ProjectMemberRemovedEvent;
 
@@ -54,6 +57,7 @@ class ProjectRepository
         foreach ($allMemberships as $membership) {
             if ($membership->project_id === $project->id) {
                 $membership->delete();
+                ProjectMemberInviteDeniedEvent::dispatch($project, $member);
             }
         }
     }
@@ -66,6 +70,7 @@ class ProjectRepository
             if ($membership->project_id === $project->id) {
                 $membership->joined_at = Carbon::now();
                 $membership->save();
+                ProjectMemberInviteAcceptedEvent::dispatch($project, $member);
             }
         }
     }
@@ -77,6 +82,7 @@ class ProjectRepository
         foreach ($allMemberships as $membership) {
             if ($membership->project_id === $project->id) {
                 $membership->delete();
+                MemberLeftProjectEvent::dispatch($project, $member);
             }
         }
     }
@@ -120,23 +126,6 @@ class ProjectRepository
 
         return (bool)$found;
     }
-
-    public function pendingInvite2(Project $project, $member): bool
-    {
-        $query = $project->memberships();
-
-        $query = $this->scopeMember($query, $member);
-        $query = $this->scopeJoined($query);
-        $query = $this->scopeNotExpired($query);
-
-        $table = (new TribeMembership())->getTable();
-        $query = $query->whereNull("$table.deleted_at");
-
-        $member = $query->first();
-
-        return (bool)$member;
-    }
-
 
     public function isMember(Project $project, $member): bool
     {

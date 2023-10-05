@@ -11,8 +11,8 @@ tc:
 translation_upload
 translation_change
 
-test rules
 Scopes
+test events
 
 
 # TODO
