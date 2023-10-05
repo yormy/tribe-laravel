@@ -18,16 +18,23 @@ class MemberOfProjectRule implements ValidationRule
     {
         $projectXid = $value;
 
+        $member = Auth::user();
+        if (!$member) {
+            $fail('xid.message.invalid');
+            return;
+        }
+
         $projectRepository = new ProjectRepository();
         $project = $projectRepository->findOneByXid($projectXid);
         if (!$project) {
             $fail('xid.message.invalid');
+            return;
         }
 
-        $member = Auth::user();
         $isMember = $projectRepository->isMember($project, $member);
         if (!$isMember) {
             $fail('xid.message.invalid');
+            return;
         }
     }
 }

@@ -4,12 +4,14 @@ namespace Yormy\TribeLaravel\Tests\Unit;
 
 use Illuminate\Contracts\Validation\Rule;
 use Yormy\TribeLaravel\Models\Project;
+use Yormy\TribeLaravel\Models\TribePermission;
 use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Repositories\ProjectRepository;
 use Yormy\TribeLaravel\Rules\DummyRule;
 use Yormy\TribeLaravel\Rules\MemberOfProjectRule;
 use Yormy\TribeLaravel\Rules\ProjectActiveRule;
 use Yormy\TribeLaravel\Rules\ProjectExistsRule;
+use Yormy\TribeLaravel\Rules\ProjectPermissionRule;
 use Yormy\TribeLaravel\Tests\TestCase;
 use Yormy\TribeLaravel\Tests\Traits\MemberTrait;
 use Yormy\TribeLaravel\Tests\Unit\Traits\AssertInviteTrait;
@@ -104,6 +106,46 @@ class RuleTest extends TestCase
         $project = Project::factory()->disabled()->create();
 
         $rule = new ProjectActiveRule();
+        $this->assertRuleFails($rule, $project->xid);
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-rule
+     * @group xxx
+     */
+    public function ProjectRule_ProjectPermission_Pass(): void
+    {
+        $permissionName = 'add_member';
+        $member = $this->createMember();
+        $project = Project::factory()->create();
+        $role = TribeRole::factory()->project($project)->create();
+        TribePermission::factory()->role($role)->create(['name' => $permissionName]);
+
+        $this->inviteAndAccept($project, $member, $role);
+
+        $rule = new ProjectPermissionRule($permissionName);
+        $this->assertRulePasses($rule, $project->xid);
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-rule
+     * @group xxx
+     */
+    public function ProjectRule_ProjectPermission_Fail(): void
+    {
+        $permissionName = 'add_member';
+        $member = $this->createMember();
+        $project = Project::factory()->create();
+        $role = TribeRole::factory()->project($project)->create();
+        TribePermission::factory()->role($role)->create(['name' => $permissionName]);
+
+        $this->inviteAndAccept($project, $member, $role);
+
+        $rule = new ProjectPermissionRule('wrong permission');
         $this->assertRuleFails($rule, $project->xid);
     }
 }
