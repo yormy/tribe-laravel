@@ -14,7 +14,7 @@ use Yormy\TribeLaravel\Tests\Setup\Models\Member;
 use Yormy\TribeLaravel\Tests\TestCase;
 use Yormy\TribeLaravel\Tests\Traits\MemberTrait;
 
-class RestartTest extends TestCase
+class InviteTest extends TestCase
 {
     use MemberTrait;
 
