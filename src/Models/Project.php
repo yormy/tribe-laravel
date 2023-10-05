@@ -2,9 +2,11 @@
 
 namespace Yormy\TribeLaravel\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
+use Yormy\TribeLaravel\Models\Scopes\MembershipScopeTrait;
 use Yormy\Xid\Models\Traits\Xid;
 
 class Project extends BaseModel
@@ -12,6 +14,7 @@ class Project extends BaseModel
     use SoftDeletes;
     use Xid;
     use PackageFactoryTrait;
+    use MembershipScopeTrait;
 
     protected $table = 'tribe_projects';
 
@@ -26,6 +29,5 @@ class Project extends BaseModel
 
         return $this->belongsToMany($memberClass, (new TribeMembership())->getTable())->withTimestamps();
     }
-
 
 }

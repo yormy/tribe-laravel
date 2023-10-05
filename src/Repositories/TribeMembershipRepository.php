@@ -31,9 +31,9 @@ class TribeMembershipRepository
             ->member($member)
             ->get()
             ->count();
+//
+//        dd($x);
 
-        dd($x);
-        
         return (bool)$member;
     }
 }

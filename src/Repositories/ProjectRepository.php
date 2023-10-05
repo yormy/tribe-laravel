@@ -7,6 +7,7 @@ namespace Yormy\TribeLaravel\Repositories;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Carbon;
 use Yormy\TribeLaravel\Models\Project;
+use Yormy\TribeLaravel\Models\Scopes\MembershipScopeTrait;
 use Yormy\TribeLaravel\Models\TribeMembership;
 use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Models\TribePermission;
@@ -16,6 +17,8 @@ use Yormy\TribeLaravel\Observers\Events\ProjectMemberRemovedEvent;
 
 class ProjectRepository
 {
+    use MembershipScopeTrait;
+
     public function __construct(private ?Project $model = null)
     {
         if (! $model) {
@@ -102,19 +105,15 @@ class ProjectRepository
         return (bool)$member;
     }
 
-
     public function isMember(Project $project, $member): bool
     {
-        $member = $project
-            ->memberships()
-            ->where('member_id', $member->id)
-            ->whereNull('tribe_memberships.deleted_at') // todo table name
-            ->whereNotNull('joined_at')
-            ->whereDate('expires_at', '>=', Carbon::now()) // to scope ?
-            ->get()
-            ->first();
+        $query = $project->memberships();
+        $query = $this->scopeMember($query, $member);
+        $query = $this->scopeActive($query);
 
-        return (bool)$member;
+        $memberCount = $query->get()->count();
+
+        return (bool)$memberCount;
     }
 
     public function isMemberWithRole(Project $project, $member, TribeRole $role): bool

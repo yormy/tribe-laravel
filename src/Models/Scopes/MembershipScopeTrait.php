@@ -3,6 +3,7 @@
 namespace Yormy\TribeLaravel\Models\Scopes;
 use Carbon\Carbon;
 use Yormy\TribeLaravel\Models\Project;
+use Yormy\TribeLaravel\Models\TribeMembership;
 
 trait MembershipScopeTrait
 {
@@ -38,8 +39,9 @@ trait MembershipScopeTrait
 
     public function scopeNotDeleted($query)
     {
+        $table = (new TribeMembership())->getTable();
         return $query
-            ->whereNull('deleted_at');
+            ->whereNull("$table.deleted_at");
     }
 
     public function scopeActive($query)
