@@ -34,11 +34,9 @@ class RestartTest extends TestCase
         $this->actingAs($member);
         $projectRepository->inviteMember($project, $member, $role);
 
-        $isMember = $projectRepository->isMember($project, $member);
-        $this->assertFalse($isMember);
+        $this->assertTrue($projectRepository->pendingInvite($project, $member));
 
-        $allActiveMembers = $projectRepository->allActiveMembers($project);
-        $this->assertCount(0, $allActiveMembers);
+        $this->assertIsNotMember($project, $member);
 
         $allActiveProjects = $projectRepository->allActiveProjects($member);
         $this->assertCount(0, $allActiveProjects);
@@ -50,23 +48,24 @@ class RestartTest extends TestCase
      * @group tribe-invite
      * @group xxx
      */
-    public function ProjectInvitedMember_AcceptMembership_MemberOfProject(): void
+    public function ProjectInvited_Accept_MemberOfProject(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
-        $role = TribeRole::factory()->project($project)->create();
-
         $this->inviteAndAccept($project, $member);
 
         $projectRepository = new ProjectRepository();
         $isMember = $projectRepository->isMember($project, $member);
         $this->assertTrue($isMember);
 
+        $this->assertFalse($projectRepository->pendingInvite($project, $member));
+
         $allActiveMembers = $projectRepository->allActiveMembers($project);
         $this->assertCount(1, $allActiveMembers);
 
         $allActiveProjects = $projectRepository->allActiveProjects($member);
         $this->assertCount(1, $allActiveProjects);
+
     }
 
     /**
@@ -75,11 +74,33 @@ class RestartTest extends TestCase
      * @group tribe-invite
      * @group xxx
      */
-    public function ProjectInvitedMember_AcceptMembership_NotMemberOfOtherProject(): void
+    public function ProjectInvited_Deny_NotMember(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
         $role = TribeRole::factory()->project($project)->create();
+
+        $projectRepository = new ProjectRepository();
+        $this->actingAs($member);
+        $projectRepository->inviteMember($project, $member, $role);
+
+        $projectRepository->denyInvite($project, $member);
+
+        $this->assertFalse($projectRepository->pendingInvite($project, $member));
+
+        $this->assertIsNotMember($project, $member);
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-invite
+     * @group xxx
+     */
+    public function ProjectMembership_NotMemberOfOtherProject(): void
+    {
+        $member = $this->createMember();
+        $project = Project::factory()->create();
         $this->inviteAndAccept($project, $member);
 
         $projectRepository = new ProjectRepository();
@@ -97,98 +118,78 @@ class RestartTest extends TestCase
      * @group tribe-invite
      * @group xxx
      */
-    public function ProjectInvitedMember_AcceptMembership_OtherMemberNotMemberOfProject(): void
+    public function ProjectMembership_OtherMemberNotMemberOfProject(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
-        $role = TribeRole::factory()->project($project)->create();
         $this->inviteAndAccept($project, $member);
 
         $projectRepository = new ProjectRepository();
 
         $member2 = $this->createMember();
-        $isMember = $projectRepository->isMember($project, $member2);
-        $this->assertFalse($isMember);
 
         $allActiveProjects = $projectRepository->allActiveProjects($member);
         $this->assertCount(1, $allActiveProjects);
 
-        $allActiveProjects = $projectRepository->allActiveProjects($member2);
-        $this->assertCount(0, $allActiveProjects);
+        $this->assertIsNotMember($project, $member2);
     }
-
-
-
-
-
-
-
 
     /**
      * @test
      *
      * @group tribe-invite
-     */
-    public function ProjectInvitedMember_Deny_NotMember(): void
+     * @group xxx
+    */
+    public function ProjectMemberhsip_Expired_NotMember(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
-        $role = TribeRole::factory()->project($project)->create();
+        $this->inviteAndAccept($project, $member);
 
         $projectRepository = new ProjectRepository();
-        $this->actingAs($member);
-        $projectRepository->inviteMember($project, $member, $role);
 
+        Carbon::setTestNow(CarbonImmutable::now()->addYears(2));
+        $this->assertIsNotMember($project, $member);
+    }
 
-        $projectRepository->denyInvite($project, $member);
+    private function assertIsNotMember(Project $project, $member)
+    {
+        $projectRepository = new ProjectRepository();
 
         $isMember = $projectRepository->isMember($project, $member);
         $this->assertFalse($isMember);
+
+        $allActiveProjects = $projectRepository->allActiveProjects($member);
+        $this->assertCount(0, $allActiveProjects);
     }
 
-    /**
-     * @test
-     *
-     * @group tribe-invite
-
-     */
-    public function ProjectInvitedMember_Expire_NotMember(): void
+    private function assertIsMember(Project $project, $member)
     {
-        $member = $this->createMember();
-        $project = Project::factory()->create();
-        $role = TribeRole::factory()->project($project)->create();
-        $this->inviteAndAccept($project, $member);
-
         $projectRepository = new ProjectRepository();
 
         $isMember = $projectRepository->isMember($project, $member);
         $this->assertTrue($isMember);
 
-        Carbon::setTestNow(CarbonImmutable::now()->addYears(2));
-        $isMember = $projectRepository->isMember($project, $member);
-        $this->assertFalse($isMember);
+        $allActiveProjects = $projectRepository->allActiveProjects($member);
+        $this->assertCount(1, $allActiveProjects);
     }
 
     /**
      * @test
      *
      * @group tribe-invite
-
+     * @group xxx
      */
-    public function ProjectInvitedMember_Leave_NotMember(): void
+    public function ProjectMembership_Leave_NotMember(): void
     {
         $member = $this->createMember();
         $project = Project::factory()->create();
-        $role = TribeRole::factory()->project($project)->create();
         $this->inviteAndAccept($project, $member);
 
         $projectRepository = new ProjectRepository();
-        $this->assertFalse($projectRepository->pendingInvite($project, $member));
-
         $projectRepository->leave($project, $member);
 
-        $isMember = $projectRepository->isMember($project, $member);
-        $this->assertFalse($isMember);
+        $this->assertIsNotMember($project, $member);
     }
 
     /**
