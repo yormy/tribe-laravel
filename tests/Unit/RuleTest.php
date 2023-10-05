@@ -7,6 +7,7 @@ use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\TribePermission;
 use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Repositories\ProjectRepository;
+use Yormy\TribeLaravel\Rules\ProjectApiKeyRule;
 use Yormy\TribeLaravel\Rules\DummyRule;
 use Yormy\TribeLaravel\Rules\MemberOfProjectRule;
 use Yormy\TribeLaravel\Rules\ProjectActiveRule;
@@ -113,7 +114,6 @@ class RuleTest extends TestCase
      * @test
      *
      * @group tribe-rule
-     * @group xxx
      */
     public function ProjectRule_ProjectPermission_Pass(): void
     {
@@ -133,7 +133,6 @@ class RuleTest extends TestCase
      * @test
      *
      * @group tribe-rule
-     * @group xxx
      */
     public function ProjectRule_ProjectPermission_Fail(): void
     {
@@ -147,5 +146,47 @@ class RuleTest extends TestCase
 
         $rule = new ProjectPermissionRule('wrong permission');
         $this->assertRuleFails($rule, $project->xid);
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-rule
+     * @group xxx
+     */
+    public function ProjectRule_ApiKey_Pass(): void
+    {
+        $project = Project::factory()->create();
+
+        $rule = new ProjectApiKeyRule();
+        $this->assertRulePasses($rule, $project->api_submit_key);
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-rule
+     * @group xxx
+     */
+    public function ProjectRule_WrongApiKey_Fail(): void
+    {
+        $project = Project::factory()->create();
+
+        $rule = new ProjectApiKeyRule();
+        $this->assertRuleFails($rule, 'invalid_key');
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-rule
+     * @group xxx
+     */
+    public function ProjectRule_DisabledProjectApiKey_Fail(): void
+    {
+        $project = Project::factory()->disabled()->create();
+
+        $rule = new ProjectApiKeyRule();
+        $this->assertRuleFails($rule, $project->api_submit_key);
     }
 }

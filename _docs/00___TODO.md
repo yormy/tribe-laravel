@@ -1,4 +1,5 @@
 add default roles ?
+or god permission
 
 owner:
 member_add

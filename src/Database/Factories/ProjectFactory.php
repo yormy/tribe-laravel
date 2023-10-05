@@ -5,6 +5,7 @@ namespace Yormy\TribeLaravel\Database\Factories;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Yormy\TribeLaravel\Models\Project;
+use Yormy\TribeLaravel\Services\TokenService;
 use Yormy\Xid\Services\XidService;
 
 class ProjectFactory extends Factory
@@ -16,6 +17,7 @@ class ProjectFactory extends Factory
         return [
             'xid' => XidService::generate(),
             'name' => $this->faker->firstName,
+            'api_submit_key' => TokenService::generate()
         ];
     }
 

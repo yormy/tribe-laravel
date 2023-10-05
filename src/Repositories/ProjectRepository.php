@@ -40,6 +40,14 @@ class ProjectRepository
             ->first();
     }
 
+    public function findOneActiveByApiKey(string $apiKey): ?Project
+    {
+        return $this->model
+            ->where('api_submit_key' , $apiKey)
+            ->whereNull('disabled_at')
+            ->first();
+    }
+
     public function denyInvite(Project $project, $member): void
     {
         $allMemberships = $member->tribeMemberships;
