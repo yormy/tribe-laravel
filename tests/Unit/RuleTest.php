@@ -2,6 +2,7 @@
 
 namespace Yormy\TribeLaravel\Tests\Unit;
 
+use Illuminate\Contracts\Validation\Rule;
 use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Repositories\ProjectRepository;
@@ -9,11 +10,14 @@ use Yormy\TribeLaravel\Rules\DummyRule;
 use Yormy\TribeLaravel\Tests\TestCase;
 use Yormy\TribeLaravel\Tests\Traits\MemberTrait;
 use Yormy\TribeLaravel\Tests\Unit\Traits\AssertInviteTrait;
+use Illuminate\Contracts\Validation\ValidationRule;
+use Yormy\TribeLaravel\Tests\Unit\Traits\AssertRuleTrait;
 
 class RuleTest extends TestCase
 {
     use MemberTrait;
     use AssertInviteTrait;
+    use AssertRuleTrait;
 
     /**
      * @test
@@ -34,22 +38,8 @@ class RuleTest extends TestCase
         $this->assertTrue($projectRepository->pendingInvite($project, $member));
 
         $rule = new DummyRule();
-        //$this->assertTrue($rule->passes('test', 'ss'));
 
-        $passes = true;
-        $rule->validate('h', 'fail', static function () use (&$passes): void {
-                $passes = false;
-            });
-
-        $this->assertFalse($passes);
-
-
-        $passes = true;
-        $rule->validate('h', 'dddd', static function () use (&$passes): void {
-            $passes = false;
-        });
-
-        $this->assertTrue($passes);
+        $this->assertRulePasses($rule, 's');
+        $this->assertRuleFails($rule, 'fail');
     }
-
 }
