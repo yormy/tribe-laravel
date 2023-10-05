@@ -19,6 +19,12 @@ trait MembershipScopeTrait
             ->where('member_id', '=', $member->id);
     }
 
+    public function scopeRole($query, $role)
+    {
+        return $query
+            ->where('role_id', '=', $role->id);
+    }
+
     public function scopeNotExpired($query)
     {
         return $query
@@ -29,6 +35,12 @@ trait MembershipScopeTrait
     {
         return $query
             ->whereNotNull('joined_at');
+    }
+
+    public function scopeNotJoined($query)
+    {
+        return $query
+            ->whereNull('joined_at');
     }
 
     public function scopeInvited($query)
@@ -42,6 +54,12 @@ trait MembershipScopeTrait
         $table = (new TribeMembership())->getTable();
         return $query
             ->whereNull("$table.deleted_at");
+    }
+
+    public function scopeNotDisabled($query)
+    {
+        return $query
+            ->whereNull("disabled_at");
     }
 
     public function scopeActive($query)
