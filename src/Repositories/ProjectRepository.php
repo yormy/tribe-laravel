@@ -63,8 +63,10 @@ class ProjectRepository
         $allMemberships = $member->tribeMemberships;
 
         foreach ($allMemberships as $membership) {
-            $membership->joined_at = Carbon::now();
-            $membership->save(); // todo select proiject
+            if ($membership->project_id === $project->id) {
+                $membership->joined_at = Carbon::now();
+                $membership->save();
+            }
         }
     }
 

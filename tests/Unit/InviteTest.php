@@ -85,6 +85,38 @@ class InviteTest extends TestCase
      *
      * @group tribe-invite
      */
+    public function ProjectInvited2Projects_Accept_MemberOfProject(): void
+    {
+        $member = $this->createMember();
+        $project = Project::factory()->create();
+        $role = TribeRole::factory()->project($project)->create();
+
+        $projectRepository = new ProjectRepository();
+        $this->actingAs($member);
+        $projectRepository->inviteMember($project, $member, $role);
+
+        $project = Project::factory()->create();
+        $projectRepository->inviteMember($project, $member, $role);
+
+        $startPendingInvites = TribeMembership::whereNull('joined_at')->count();
+        $projectRepository->acceptInvite($project, $member);
+
+        $newPendingInvites = TribeMembership::whereNull('joined_at')->count();
+        $this->assertEquals($startPendingInvites-1, $newPendingInvites);
+
+        $this->assertIsMember($project, $member);
+
+        $projectRepository = new ProjectRepository();
+        $this->assertFalse($projectRepository->pendingInvite($project, $member));
+
+        $this->assertActiveProjects($member, 1);
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-invite
+     */
     public function ProjectInvited_Deny_NotMember(): void
     {
         $member = $this->createMember();
