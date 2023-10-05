@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
+/*
+ * class Project extends Model
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new MemberOfProjectScope(new Project()));
+    }
+ */
+
 class MemberOfProjectScope implements Scope
 {
     private Model $project;
