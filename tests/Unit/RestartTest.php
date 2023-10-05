@@ -24,6 +24,25 @@ class RestartTest extends TestCase
      * @group tribe-invite
      * @group xxx
      */
+    public function Project_InvitedMember_Pending(): void
+    {
+        $member = $this->createMember();
+        $project = Project::factory()->create();
+        $role = TribeRole::factory()->project($project)->create();
+
+        $projectRepository = new ProjectRepository();
+        $this->actingAs($member);
+        $projectRepository->inviteMember($project, $member, $role);
+
+        $this->assertTrue($projectRepository->pendingInvite($project, $member));
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-invite
+     * @group xxx
+     */
     public function Project_InviteMember_NotMemberYet(): void
     {
         $member = $this->createMember();
@@ -38,8 +57,7 @@ class RestartTest extends TestCase
 
         $this->assertIsNotMember($project, $member);
 
-        $allActiveProjects = $projectRepository->allActiveProjects($member);
-        $this->assertCount(0, $allActiveProjects);
+        $this->assertActiveProjects($member, 0);
     }
 
     /**
@@ -54,19 +72,21 @@ class RestartTest extends TestCase
         $project = Project::factory()->create();
         $this->inviteAndAccept($project, $member);
 
-        $projectRepository = new ProjectRepository();
-        $isMember = $projectRepository->isMember($project, $member);
-        $this->assertTrue($isMember);
+        $this->assertIsMember($project, $member);
 
+        $projectRepository = new ProjectRepository();
         $this->assertFalse($projectRepository->pendingInvite($project, $member));
 
-        $allActiveMembers = $projectRepository->allActiveMembers($project);
-        $this->assertCount(1, $allActiveMembers);
-
-        $allActiveProjects = $projectRepository->allActiveProjects($member);
-        $this->assertCount(1, $allActiveProjects);
-
+        $this->assertActiveProjects($member, 1);
     }
+
+    private function assertActiveProjects($member, int $count)
+    {
+        $projectRepository = new ProjectRepository();
+        $allActiveProjects = $projectRepository->allActiveProjects($member);
+        $this->assertCount($count, $allActiveProjects);
+    }
+
 
     /**
      * @test
@@ -108,8 +128,7 @@ class RestartTest extends TestCase
         $isMember = $projectRepository->isMember($project2, $member);
         $this->assertFalse($isMember);
 
-        $allActiveProjects = $projectRepository->allActiveProjects($member);
-        $this->assertCount(1, $allActiveProjects);
+        $this->assertActiveProjects($member, 1);
     }
 
     /**
@@ -124,14 +143,10 @@ class RestartTest extends TestCase
         $project = Project::factory()->create();
         $this->inviteAndAccept($project, $member);
 
-        $projectRepository = new ProjectRepository();
-
         $member2 = $this->createMember();
 
-        $allActiveProjects = $projectRepository->allActiveProjects($member);
-        $this->assertCount(1, $allActiveProjects);
-
         $this->assertIsNotMember($project, $member2);
+        $this->assertActiveProjects($member, 1);
     }
 
     /**
@@ -146,32 +161,8 @@ class RestartTest extends TestCase
         $project = Project::factory()->create();
         $this->inviteAndAccept($project, $member);
 
-        $projectRepository = new ProjectRepository();
-
         Carbon::setTestNow(CarbonImmutable::now()->addYears(2));
         $this->assertIsNotMember($project, $member);
-    }
-
-    private function assertIsNotMember(Project $project, $member)
-    {
-        $projectRepository = new ProjectRepository();
-
-        $isMember = $projectRepository->isMember($project, $member);
-        $this->assertFalse($isMember);
-
-        $allActiveProjects = $projectRepository->allActiveProjects($member);
-        $this->assertCount(0, $allActiveProjects);
-    }
-
-    private function assertIsMember(Project $project, $member)
-    {
-        $projectRepository = new ProjectRepository();
-
-        $isMember = $projectRepository->isMember($project, $member);
-        $this->assertTrue($isMember);
-
-        $allActiveProjects = $projectRepository->allActiveProjects($member);
-        $this->assertCount(1, $allActiveProjects);
     }
 
     /**
@@ -192,81 +183,27 @@ class RestartTest extends TestCase
         $this->assertIsNotMember($project, $member);
     }
 
-    /**
-     * @test
-     *
-     * @group tribe-invite
+    // ---------- HELPERS ----------
 
-     */
-    public function Project_InvitedMember_Pending(): void
+    private function assertIsNotMember(Project $project, $member)
     {
-        $member = $this->createMember();
-        $project = Project::factory()->create();
-        $role = TribeRole::factory()->project($project)->create();
-
         $projectRepository = new ProjectRepository();
-        $this->actingAs($member);
-        $projectRepository->inviteMember($project, $member, $role);
 
-        $this->assertTrue($projectRepository->pendingInvite($project, $member));
+        $isMember = $projectRepository->isMember($project, $member);
+        $this->assertFalse($isMember);
+
+        $this->assertActiveProjects($member, 0);
     }
 
-    /**
-     * @test
-     *
-     * @group tribe-invite
-
-     */
-    public function testing2(): void
+    private function assertIsMember(Project $project, $member)
     {
-        $member = $this->createMember();
-        $project = Project::factory()->create();
-        $role = TribeRole::factory()->project($project)->create();
-        $this->inviteAndAccept($project, $member);
-
         $projectRepository = new ProjectRepository();
+
         $isMember = $projectRepository->isMember($project, $member);
         $this->assertTrue($isMember);
+
+        $this->assertActiveProjects($member, 1);
     }
-
-    /**
-     * @test
-     *
-     * @group tribe-invite
-
-     */
-    public function ProjectMember_NewMember_OrginalIsMember(): void
-    {
-        $memberOriginal = $this->createMember();
-        $project = Project::factory()->create();
-        $this->inviteAndAccept($project, $memberOriginal);
-
-        $memberNew = $this->createMember();
-        $projectRepository = new ProjectRepository();
-        $isMember = $projectRepository->isMember($project, $memberOriginal);
-        $this->assertTrue($isMember);
-    }
-
-    /**
-     * @test
-     *
-     * @group tribe-invite
-
-     */
-    public function ProjectMember_NewMember_IsNotMember(): void
-    {
-        $memberOriginal = $this->createMember();
-        $project = Project::factory()->create();
-        $this->inviteAndAccept($project, $memberOriginal);
-
-        $memberNew = $this->createMember();
-
-        $projectRepository = new ProjectRepository();
-        $isMember = $projectRepository->isMember($project, $memberNew);
-        $this->assertFalse($isMember);
-    }
-
-    // ---------- HELPERS ----------
 
     private function inviteAndAccept($project, $member)
     {
