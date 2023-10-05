@@ -10,8 +10,8 @@ use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\TribeMembership;
 use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Models\TribePermission;
-use Yormy\TribeLaravel\Observers\Events\ProjectMemberInviteAcceptedEvent;
-use Yormy\TribeLaravel\Observers\Events\ProjectMemberInvitedEvent;
+use Yormy\TribeLaravel\Observers\Events\TribeMembershipAcceptedEvent;
+use Yormy\TribeLaravel\Observers\Events\TribeMembershipInvitedEvent;
 use Yormy\TribeLaravel\Observers\Events\ProjectMemberRemovedEvent;
 
 class TribeMembershipRepository

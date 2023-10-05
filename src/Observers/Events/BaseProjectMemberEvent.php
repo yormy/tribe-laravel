@@ -10,15 +10,9 @@ abstract class BaseProjectMemberEvent
     use Dispatchable;
     use SerializesModels;
 
-    protected $project;
-
-    protected $member;
-
-
-    public function __construct($project, $member)
+    public function __construct(private $project, private $member)
     {
-        $this->project = $project;
-        $this->member = $member;
+        // ...
     }
 
     public function getProject()

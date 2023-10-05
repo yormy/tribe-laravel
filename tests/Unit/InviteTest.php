@@ -115,14 +115,9 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
-     * @group xxx
      */
     public function ProjectMultipleMembership_Leave_NotMember(): void
     {
-        Schema::disableForeignKeyConstraints();
-        TribeMembership::truncate();
-        Member::truncate();
-        Project::truncate();
         $member = $this->createMember();
         $project = Project::factory()->create();
         $this->inviteAndAccept($project, $member);

@@ -5,7 +5,7 @@ namespace Yormy\TribeLaravel\Observers\Events;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MemberInvitedEvent extends BaseProjectMemberEvent
+class TribeMembershipAcceptedEvent extends BaseProjectMemberEvent
 {
 
 }
