@@ -1,6 +1,3 @@
-# TODO
-assert event fired / emails  => implement in testapp
-
 # Scopes
 only show my projects
 only show my active projects
