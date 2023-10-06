@@ -10,7 +10,6 @@ abstract class FormRouteRequest extends FormRequest
 
     protected $queryParamsToValidate = [];
 
-
     public function rules()
     {
         if ($this->method() == 'GET') {

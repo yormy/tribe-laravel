@@ -15,9 +15,8 @@ use Yormy\TribeLaravel\Tests\Unit\Traits\AssertInviteTrait;
 
 class RolePermissionTest extends TestCase
 {
-    use MemberTrait;
     use AssertInviteTrait;
-
+    use MemberTrait;
 
     /**
      * @test
@@ -120,7 +119,7 @@ class RolePermissionTest extends TestCase
         $tibeMembershipRepository = new TribeMembershipRepository();
         $newRole = TribeRole::factory()->project($project)->create();
         TribePermission::factory()->role($newRole)->create(['name' => 'new_role_permission']);
-        $tibeMembershipRepository->setRole($membership, $newRole , CarbonImmutable::now()->addDay());
+        $tibeMembershipRepository->setRole($membership, $newRole, CarbonImmutable::now()->addDay());
 
         $projectRepository = new ProjectRepository();
         $member->refresh();

@@ -19,7 +19,7 @@ class ProjectMemberResource extends JsonResource
             'project_role' => $this->project_role,
             'is_owner' => $this->is_owner,
             'expires_at' => Datehelper::formatDateTimeFromString($this->expires_at),
-            'is_expired' => $this->isExpired($this->expires_at)
+            'is_expired' => $this->isExpired($this->expires_at),
         ];
 
         $dates = $this->getDates([
@@ -31,12 +31,10 @@ class ProjectMemberResource extends JsonResource
 
     private function isExpired($date): bool
     {
-        if (!$date) {
+        if (! $date) {
             return false;
         }
 
         return Carbon::now()->gt(Carbon::parse($date));
     }
-
 }
-

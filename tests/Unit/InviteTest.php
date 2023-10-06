@@ -4,23 +4,18 @@ namespace Yormy\TribeLaravel\Tests\Unit;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
 use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\TribeMembership;
 use Yormy\TribeLaravel\Models\TribeRole;
-use Yormy\TribeLaravel\Models\TribePermission;
 use Yormy\TribeLaravel\Repositories\ProjectRepository;
-use Yormy\TribeLaravel\Repositories\TribeMembershipRepository;
-use Yormy\TribeLaravel\Tests\Setup\Models\Member;
 use Yormy\TribeLaravel\Tests\TestCase;
 use Yormy\TribeLaravel\Tests\Traits\MemberTrait;
 use Yormy\TribeLaravel\Tests\Unit\Traits\AssertInviteTrait;
 
 class InviteTest extends TestCase
 {
-    use MemberTrait;
     use AssertInviteTrait;
+    use MemberTrait;
 
     /**
      * @test
@@ -125,7 +120,7 @@ class InviteTest extends TestCase
      * @test
      *
      * @group tribe-invite
-    */
+     */
     public function TribeMembership_Expired_NotMember(): void
     {
         $member = $this->createMember();
@@ -195,7 +190,7 @@ class InviteTest extends TestCase
         $projectRepository->acceptInvite($project, $member);
 
         $newPendingInvites = TribeMembership::whereNull('joined_at')->count();
-        $this->assertEquals($startPendingInvites-1, $newPendingInvites);
+        $this->assertEquals($startPendingInvites - 1, $newPendingInvites);
 
         $this->assertIsMember($project, $member);
         $this->assertActiveProjects($member, 1);
@@ -225,12 +220,11 @@ class InviteTest extends TestCase
 
         $newActiveMemberships = TribeMembership::whereNull('deleted_at')->count();
 
-        $this->assertEquals($startActiveMemberships-1, $newActiveMemberships);
+        $this->assertEquals($startActiveMemberships - 1, $newActiveMemberships);
 
         $this->assertIsNotMember($project, $member);
         $this->assertActiveProjects($member, 1);
     }
-
 
     /**
      * @test
@@ -256,7 +250,7 @@ class InviteTest extends TestCase
         $projectRepository->denyInvite($project, $member);
 
         $newPendingInvites = TribeMembership::whereNull('joined_at')->count();
-        $this->assertEquals($startPendingInvites-1, $newPendingInvites);
+        $this->assertEquals($startPendingInvites - 1, $newPendingInvites);
 
         $this->assertFalse($projectRepository->pendingInvite($project, $member));
 

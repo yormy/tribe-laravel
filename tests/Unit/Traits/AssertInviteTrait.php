@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yormy\TribeLaravel\Tests\Unit\Traits;
 
@@ -10,7 +12,7 @@ trait AssertInviteTrait
 {
     protected function inviteAndAccept($project, $member, $role = null)
     {
-        if (!$role) {
+        if (! $role) {
             $role = TribeRole::factory()->project($project)->create();
         }
 
@@ -37,7 +39,6 @@ trait AssertInviteTrait
         $isMember = $projectRepository->isMember($project, $member);
         $this->assertTrue($isMember);
     }
-
 
     protected function assertActiveProjects($member, int $count)
     {

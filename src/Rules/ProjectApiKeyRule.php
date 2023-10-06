@@ -6,7 +6,6 @@ namespace Yormy\TribeLaravel\Rules;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Support\Facades\Auth;
 use Yormy\TribeLaravel\Repositories\ProjectRepository;
 use Yormy\TribeLaravel\Services\TokenService;
 
@@ -18,6 +17,7 @@ class ProjectApiKeyRule implements ValidationRule
 
         if (! TokenService::validate($apiKey)) {
             $fail('xid.message.invalid');
+
             return;
         }
 
@@ -25,6 +25,7 @@ class ProjectApiKeyRule implements ValidationRule
         $project = $projectRepository->findOneActiveByApiKey($apiKey);
         if (! $project) {
             $fail('xid.message.invalid');
+
             return;
         }
     }

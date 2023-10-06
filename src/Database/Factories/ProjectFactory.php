@@ -17,7 +17,7 @@ class ProjectFactory extends Factory
         return [
             'xid' => XidService::generate(),
             'name' => $this->faker->firstName,
-            'api_submit_key' => TokenService::generate()
+            'api_submit_key' => TokenService::generate(),
         ];
     }
 
@@ -25,9 +25,8 @@ class ProjectFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'disabled_at' => Carbon::now()->subHours(2)
+                'disabled_at' => Carbon::now()->subHours(2),
             ];
         });
     }
-
 }

@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 use Yormy\ProjectMembersLaravel\Models\ProjectInvite;
-use Yormy\ProjectMembersLaravel\Models\ProjectMember;
 
 trait HasMembersTrait
 {
@@ -19,7 +17,7 @@ trait HasMembersTrait
         return $this->membersBase()
             ->select(['members.*', 'project_role', 'expires_at'])
             ->selectRaw("project_role = '$roleOwner' as is_owner")
-            ->where(function($query) {
+            ->where(function ($query) {
                 $query->whereNull('expires_at')
                     ->orWhere('expires_at', '>', Carbon::now());
             });
@@ -70,6 +68,7 @@ trait HasMembersTrait
     public function membership()
     {
         $projectMemberModel = config('project-members-laravel.models.project_member');
+
         return $this->hasOne($projectMemberModel);
     }
 
@@ -80,7 +79,7 @@ trait HasMembersTrait
 
     public function hasRole(string $role): bool
     {
-        return !strcasecmp($this->role, $role); // 0 is equal
+        return ! strcasecmp($this->role, $role); // 0 is equal
     }
 
     public function invites(): HasMany
@@ -90,14 +89,14 @@ trait HasMembersTrait
 
     public function hasMember($member): bool
     {
-        return null !== $this->members()->where('user_id', $member->id)->first();
+        return $this->members()->where('user_id', $member->id)->first() !== null;
     }
 
     public function hasMemberWithRole($member, array $roles): bool
     {
-        return null !== $this->members()
-                ->where('user_id', $member->id)
-                ->whereIn('project_role', $roles)
-                ->first();
+        return $this->members()
+            ->where('user_id', $member->id)
+            ->whereIn('project_role', $roles)
+            ->first() !== null;
     }
 }

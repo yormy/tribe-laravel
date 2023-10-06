@@ -17,9 +17,9 @@ use Yormy\TribeLaravel\Tests\Unit\Traits\AssertRuleTrait;
 
 class RuleTest extends TestCase
 {
-    use MemberTrait;
     use AssertInviteTrait;
     use AssertRuleTrait;
+    use MemberTrait;
 
     /**
      * @test

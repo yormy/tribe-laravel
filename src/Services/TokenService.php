@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yormy\TribeLaravel\Services;
 
@@ -20,11 +22,12 @@ class TokenService
         return $encrypter->encryptString($token);
     }
 
-    public static function validate( $payload, string $encryptionKey = null): bool
+    public static function validate($payload, string $encryptionKey = null): bool
     {
         $encrypter = self::getEncrypter($encryptionKey);
         try {
             $encrypter->decryptString($payload);
+
             return true;
         } catch (\Exception $e) {
             return false;
@@ -33,7 +36,7 @@ class TokenService
 
     private static function getEncrypter(string $encryptionKey = null)
     {
-        if (!$encryptionKey) {
+        if (! $encryptionKey) {
             $key = config('tribe.api_encryption_key', config('app.key'));
             $encryptionKey = base64_decode(str_replace('base64:', '', $key));
         }

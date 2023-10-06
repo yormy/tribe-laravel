@@ -18,7 +18,7 @@ class BaseRequest extends FormRouteRequest
         $rules['i18n'] = [
             'required',
             'in:'.implode(',', array_keys(config('multilingual-admin.locales'))),
-            ];
+        ];
 
         $rules['publicId'] = 'string|min:1';
 
@@ -28,7 +28,6 @@ class BaseRequest extends FormRouteRequest
             $createRules = $this->createValidation();
             $allRules = array_merge($rules, $createRules);
         }
-
 
         if ($this->getMethod() == 'PUT') {
             $updateRules = $this->updateValidation();

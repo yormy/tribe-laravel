@@ -21,12 +21,13 @@ use Illuminate\Support\Facades\Auth;
 class MemberOfProjectScope implements Scope
 {
     private Model $project;
+
     public function __construct(Model $project)
     {
         $this->project = $project;
     }
 
-    public function apply(Builder $builder, Model $model) : Builder
+    public function apply(Builder $builder, Model $model): Builder
     {
         $projectTable = $this->project->getTable();
 
@@ -36,18 +37,18 @@ class MemberOfProjectScope implements Scope
             $projectMembersTable = config('project-members-laravel.tables.project_members');
 
             // silent fail when not logged in
-            if (!$user) {
+            if (! $user) {
                 $query
                     ->select('project_id')
                     ->from($projectMembersTable)
-                    ->where("user_id", '<', 0);
+                    ->where('user_id', '<', 0);
             } else {
                 $query
                     ->select('project_id')
                     ->from($projectMembersTable)
                     ->whereNull('deleted_at')
-                    ->where("user_id", '=', $user->id)
-                    ->where(function($query) {
+                    ->where('user_id', '=', $user->id)
+                    ->where(function ($query) {
                         $query->whereNull('expires_at')
                             ->orWhere('expires_at', '>', Carbon::now());
                     });

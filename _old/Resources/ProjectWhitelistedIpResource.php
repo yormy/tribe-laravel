@@ -18,5 +18,4 @@ class ProjectWhitelistedIpResource extends JsonResource
 
         return array_merge($fields, $dates, $this->makeSearchable());
     }
-
 }

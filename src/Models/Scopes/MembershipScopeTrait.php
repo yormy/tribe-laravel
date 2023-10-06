@@ -1,6 +1,9 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yormy\TribeLaravel\Models\Scopes;
+
 use Carbon\Carbon;
 use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\TribeMembership;
@@ -52,6 +55,7 @@ trait MembershipScopeTrait
     public function scopeNotDeleted($query)
     {
         $table = (new TribeMembership())->getTable();
+
         return $query
             ->whereNull("$table.deleted_at");
     }
@@ -59,7 +63,7 @@ trait MembershipScopeTrait
     public function scopeNotDisabled($query)
     {
         return $query
-            ->whereNull("disabled_at");
+            ->whereNull('disabled_at');
     }
 
     public function scopeActive($query)
@@ -68,6 +72,6 @@ trait MembershipScopeTrait
         $query = $this->scopeNotExpired($query);
         $query = $this->scopeNotDeleted($query);
 
-       return $query;
+        return $query;
     }
 }

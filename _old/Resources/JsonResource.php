@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yormy\ProjectMembersLaravel\Http\Resources;
 
@@ -19,8 +21,8 @@ class JsonResource extends BaseJsonResource
 
         foreach ($fields as $field) {
             $dates[$field] = $parent[$field];
-            $dates[$field . '_local'] = $parent[$field . '_local'];
-            $dates[$field . '_human'] = $parent[$field . '_human'];
+            $dates[$field.'_local'] = $parent[$field.'_local'];
+            $dates[$field.'_human'] = $parent[$field.'_human'];
         }
 
         return $dates;

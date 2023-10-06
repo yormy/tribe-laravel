@@ -19,33 +19,34 @@ class ProjectService
     {
         $roleNames = config('project-members-laravel.role_names');
         unset($roleNames[config('project-members-laravel.role_owner')]);
+
         return $roleNames;
     }
 
-//    /**
-//     * Creating an encrypted project api token.
-//     * This allows us to validate the token (decrypt it) without database access
-//     * Before validating the token.
-//     */
-//    public static function generateProjectApiKey(string $key)
-//    {
-//        $encryptionKey = base64_decode(str_replace('base64:','', $key));
-//        $token = Str::random(40);
-//        $encrypter = new Encrypter($encryptionKey, 'AES-256-CBC');
-//        return $encrypter->encryptString($token);
-//    }
-//
-//    public static function validateProjectApiKey(string $key, $payload): bool
-//    {
-//        $encryptionKey = base64_decode(str_replace('base64:','', $key));
-//        $encrypter = new Encrypter($encryptionKey, 'AES-256-CBC');
-//        try {
-//            $encrypter->decryptString($payload);
-//            return true;
-//        } catch (\Exception $e) {
-//            return false;
-//        }
-//    }
+    //    /**
+    //     * Creating an encrypted project api token.
+    //     * This allows us to validate the token (decrypt it) without database access
+    //     * Before validating the token.
+    //     */
+    //    public static function generateProjectApiKey(string $key)
+    //    {
+    //        $encryptionKey = base64_decode(str_replace('base64:','', $key));
+    //        $token = Str::random(40);
+    //        $encrypter = new Encrypter($encryptionKey, 'AES-256-CBC');
+    //        return $encrypter->encryptString($token);
+    //    }
+    //
+    //    public static function validateProjectApiKey(string $key, $payload): bool
+    //    {
+    //        $encryptionKey = base64_decode(str_replace('base64:','', $key));
+    //        $encrypter = new Encrypter($encryptionKey, 'AES-256-CBC');
+    //        try {
+    //            $encrypter->decryptString($payload);
+    //            return true;
+    //        } catch (\Exception $e) {
+    //            return false;
+    //        }
+    //    }
 
     public function updateMembership($project, $member, array $data)
     {
@@ -80,7 +81,7 @@ class ProjectService
             'project_id' => $project->id,
             'user_id' => $member->id,
             'email' => $member->email,
-            'invited_by' => $invitedBy->id
+            'invited_by' => $invitedBy->id,
         ]);
 
         MemberInvitedEvent::dispatch($project, $member);
@@ -90,9 +91,9 @@ class ProjectService
 
     public function hasPendingInvite(Model $project, Model $member): bool
     {
-        return null !== ProjectInvite::where('project_id', $project->id)
-                ->where('user_id', $member->id)
-                ->first();
+        return ProjectInvite::where('project_id', $project->id)
+            ->where('user_id', $member->id)
+            ->first() !== null;
     }
 
     public function receivedInvites(Model $member)
@@ -109,7 +110,7 @@ class ProjectService
             'deny_token' => $denyToken,
         ])->first();
 
-        if (!$invite) {
+        if (! $invite) {
             throw new InvalidInviteTokenException('invalid deny token');
         }
 
@@ -125,7 +126,7 @@ class ProjectService
             'accept_token' => $acceptToken,
         ])->first();
 
-        if (!$inviteReceived) {
+        if (! $inviteReceived) {
             throw new InvalidInviteTokenException('invalid accept token');
         }
 
@@ -145,7 +146,7 @@ class ProjectService
             'deny_token' => $denyToken,
         ])->first();
 
-        if ($denyToken && !$inviteReceived) {
+        if ($denyToken && ! $inviteReceived) {
             throw new InvalidInviteTokenException('invalid deny token');
         }
 
@@ -160,7 +161,7 @@ class ProjectService
     {
         ProjectMember::create([
             'project_id' => $projectId,
-            'user_id' => $memberId
+            'user_id' => $memberId,
         ]);
     }
 }

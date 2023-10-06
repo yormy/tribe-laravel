@@ -2,12 +2,9 @@
 
 namespace Yormy\TribeLaravel\Database\Factories;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Yormy\TribeLaravel\Models\Project;
-use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Models\TribePermission;
-use Yormy\Xid\Services\XidService;
+use Yormy\TribeLaravel\Models\TribeRole;
 
 class TribePermissionFactory extends Factory
 {

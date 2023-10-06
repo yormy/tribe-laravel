@@ -2,33 +2,24 @@
 
 namespace Yormy\TribeLaravel\Tests\Unit;
 
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Event;
 use Yormy\TribeLaravel\Models\Project;
-use Yormy\TribeLaravel\Models\TribePermission;
 use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Observers\Events\TribeMembershipAcceptedEvent;
 use Yormy\TribeLaravel\Observers\Events\TribeMembershipDeniedEvent;
 use Yormy\TribeLaravel\Observers\Events\TribeMembershipInvitedEvent;
 use Yormy\TribeLaravel\Observers\Events\TribeMembershipLeftEvent;
 use Yormy\TribeLaravel\Repositories\ProjectRepository;
-use Yormy\TribeLaravel\Rules\ProjectApiKeyRule;
-use Yormy\TribeLaravel\Rules\DummyRule;
-use Yormy\TribeLaravel\Rules\MemberOfProjectRule;
-use Yormy\TribeLaravel\Rules\ProjectActiveRule;
-use Yormy\TribeLaravel\Rules\ProjectExistsRule;
-use Yormy\TribeLaravel\Rules\ProjectPermissionRule;
 use Yormy\TribeLaravel\Tests\TestCase;
 use Yormy\TribeLaravel\Tests\Traits\MemberTrait;
 use Yormy\TribeLaravel\Tests\Unit\Traits\AssertInviteTrait;
-use Illuminate\Contracts\Validation\ValidationRule;
 use Yormy\TribeLaravel\Tests\Unit\Traits\AssertRuleTrait;
 
 class EventsTest extends TestCase
 {
-    use MemberTrait;
     use AssertInviteTrait;
     use AssertRuleTrait;
+    use MemberTrait;
 
     /**
      * @test
@@ -42,7 +33,7 @@ class EventsTest extends TestCase
         $role = TribeRole::factory()->project($project)->create();
 
         Event::fake([
-            TribeMembershipInvitedEvent::class
+            TribeMembershipInvitedEvent::class,
         ]);
 
         $projectRepository = new ProjectRepository();
@@ -64,7 +55,7 @@ class EventsTest extends TestCase
         $role = TribeRole::factory()->project($project)->create();
 
         Event::fake([
-            TribeMembershipAcceptedEvent::class
+            TribeMembershipAcceptedEvent::class,
         ]);
 
         $this->InviteAndAccept($project, $member, $role);
@@ -84,7 +75,7 @@ class EventsTest extends TestCase
         $role = TribeRole::factory()->project($project)->create();
 
         Event::fake([
-            TribeMembershipDeniedEvent::class
+            TribeMembershipDeniedEvent::class,
         ]);
 
         $projectRepository = new ProjectRepository();
@@ -107,7 +98,7 @@ class EventsTest extends TestCase
         $this->inviteAndAccept($project, $member);
 
         Event::fake([
-            TribeMembershipLeftEvent::class
+            TribeMembershipLeftEvent::class,
         ]);
 
         $projectRepository = new ProjectRepository();
@@ -115,5 +106,4 @@ class EventsTest extends TestCase
 
         Event::assertDispatched(TribeMembershipLeftEvent::class);
     }
-
 }

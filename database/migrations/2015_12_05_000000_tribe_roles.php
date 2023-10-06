@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Yormy\TribeLaravel\Models\Project;
 
 return new class extends Migration
 {
@@ -12,7 +11,7 @@ return new class extends Migration
         $projectClass = config('tribe.models.project');
         $roleClass = config('tribe.models.role');
 
-        Schema::create((new $roleClass())->getTable(), function (Blueprint $table) use ($projectClass){
+        Schema::create((new $roleClass())->getTable(), function (Blueprint $table) use ($projectClass) {
             $table->id();
             $table->foreignIdFor($projectClass)
                 ->constrained((new $projectClass())->getTable())
@@ -21,7 +20,6 @@ return new class extends Migration
 
             $table->string('code')->nullable();
             $table->string('name')->nullable();
-
 
         });
     }

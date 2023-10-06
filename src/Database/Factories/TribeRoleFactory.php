@@ -17,7 +17,6 @@ class TribeRoleFactory extends Factory
         ];
     }
 
-
     public function project(Project $project): Factory
     {
         return $this->state(function (array $attributes) use ($project) {
@@ -26,5 +25,4 @@ class TribeRoleFactory extends Factory
             ];
         });
     }
-
 }

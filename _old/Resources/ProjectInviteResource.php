@@ -11,7 +11,7 @@ class ProjectInviteResource extends JsonResource
         $fields = [
             'email' => $this->email,
             'deny_token' => $this->deny_token,
-            'created_at' => Datehelper::formatDateTime($this->created_at)
+            'created_at' => Datehelper::formatDateTime($this->created_at),
         ];
 
         return array_merge($fields, $this->makeSearchable());

@@ -6,9 +6,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use Pion\Laravel\ChunkUpload\Providers\ChunkUploadServiceProvider;
-use Yormy\TribeLaravel\TribeServiceProvider;
 use Yormy\TribeLaravel\Tests\Setup\Routes\TribeLaravelUploadRoutes;
+use Yormy\TribeLaravel\TribeServiceProvider;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -51,8 +50,8 @@ abstract class TestCase extends BaseTestCase
 
     protected function setupRoutes()
     {
-    //    TribeLaravelUploadRoutes::register();
-    //    Route::TribeLaravelUpload();
+        //    TribeLaravelUploadRoutes::register();
+        //    Route::TribeLaravelUpload();
     }
 
     protected function getPackageProviders($app)

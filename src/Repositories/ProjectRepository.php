@@ -12,11 +12,10 @@ use Yormy\TribeLaravel\Models\Scopes\MembershipScopeTrait;
 use Yormy\TribeLaravel\Models\TribeMembership;
 use Yormy\TribeLaravel\Models\TribePermission;
 use Yormy\TribeLaravel\Models\TribeRole;
-use Yormy\TribeLaravel\Observers\Events\TribeMembershipLeftEvent;
 use Yormy\TribeLaravel\Observers\Events\TribeMembershipAcceptedEvent;
 use Yormy\TribeLaravel\Observers\Events\TribeMembershipDeniedEvent;
 use Yormy\TribeLaravel\Observers\Events\TribeMembershipInvitedEvent;
-use Yormy\TribeLaravel\Observers\Events\ProjectMemberRemovedEvent;
+use Yormy\TribeLaravel\Observers\Events\TribeMembershipLeftEvent;
 
 class ProjectRepository
 {
@@ -31,13 +30,13 @@ class ProjectRepository
 
     public function findOneByXid(string $xid): ?Project
     {
-        return $this->model->where('xid' , $xid)->first();
+        return $this->model->where('xid', $xid)->first();
     }
 
     public function findOneActiveByXid(string $xid): ?Project
     {
         return $this->model
-            ->where('xid' , $xid)
+            ->where('xid', $xid)
             ->notDisabled()
             ->first();
     }
@@ -45,7 +44,7 @@ class ProjectRepository
     public function findOneActiveByApiKey(string $apiKey): ?Project
     {
         return $this->model
-            ->where('api_submit_key' , $apiKey)
+            ->where('api_submit_key', $apiKey)
             ->notDisabled()
             ->first();
     }
@@ -89,7 +88,7 @@ class ProjectRepository
 
     public function inviteMember(Project $project, $member, $role, CarbonImmutable $expiresAt = null): void
     {
-        if (!$expiresAt) {
+        if (! $expiresAt) {
             $months = config('tribe.default_expire_membership_months', 12);
             $expiresAt = CarbonImmutable::now()->addMonth($months);
         }
@@ -117,7 +116,7 @@ class ProjectRepository
 
         $found = $query->first();
 
-        return (bool)$found;
+        return (bool) $found;
     }
 
     public function isMember(Project $project, $member): bool
@@ -128,7 +127,7 @@ class ProjectRepository
 
         $memberCount = $query->count();
 
-        return (bool)$memberCount;
+        return (bool) $memberCount;
     }
 
     public function allActiveMembers(Project $project): Collection
@@ -147,7 +146,6 @@ class ProjectRepository
         return $query->get();
     }
 
-
     public function isMemberWithRole(Project $project, $member, TribeRole $role): bool
     {
         $query = $project->tribeMemberships();
@@ -159,7 +157,7 @@ class ProjectRepository
 
         $found = $query->first();
 
-        return (bool)$found;
+        return (bool) $found;
     }
 
     public function memberHasPermission(Project $project, $member, $permission): bool
@@ -169,7 +167,7 @@ class ProjectRepository
                 ->from('tribe_memberships');
             $query = $this->scopeMember($query, $member);
             $query = $this->scopeProject($query, $project);
-        })->pluck('name','id');
+        })->pluck('name', 'id');
 
         return $permsCollection->contains($permission);
     }

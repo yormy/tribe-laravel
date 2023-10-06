@@ -20,7 +20,6 @@ abstract class BaseProjectMemberEvent
         return $this->project;
     }
 
-
     public function getProjectName()
     {
         return $this->project->name;

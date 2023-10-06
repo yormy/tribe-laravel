@@ -1,4 +1,5 @@
 <?php
+
 // phpcs:disable PSR1.Classes.ClassDeclaration.MissingNamespace
 
 use Illuminate\Database\Migrations\Migration;
@@ -10,7 +11,7 @@ return new class extends Migration
     public function up()
     {
         $projectClass = config('tribe.models.project');
-        Schema::create((new $projectClass())->getTable(), function (Blueprint $table){
+        Schema::create((new $projectClass())->getTable(), function (Blueprint $table) {
             $table->id();
             $table->string('xid')->unique();
             $table->string('name');

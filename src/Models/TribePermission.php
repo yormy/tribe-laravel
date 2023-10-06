@@ -2,11 +2,17 @@
 
 namespace Yormy\TribeLaravel\Models;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
-use Yormy\TribeLaravel\Domain\Upload\DataObjects\Enums\MimeTypeEnum;
-use Yormy\Xid\Models\Traits\Xid;
 
+/**
+ * Yormy\TribeLaravel\Models\TribePermission
+ *
+ * @method static \Yormy\TribeLaravel\Database\Factories\TribePermissionFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|TribePermission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TribePermission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TribePermission query()
+ * @mixin \Eloquent
+ */
 class TribePermission extends BaseModel
 {
     use PackageFactoryTrait;

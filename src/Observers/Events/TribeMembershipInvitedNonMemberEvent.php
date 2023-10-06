@@ -4,7 +4,6 @@ namespace Yormy\TribeLaravel\Observers\Events;
 
 class TribeMembershipInvitedNonMemberEvent extends BaseProjectMemberEvent
 {
-
     public function __construct(private $project, private $member, private $inviter)
     {
         parent::__construct($project, $member);

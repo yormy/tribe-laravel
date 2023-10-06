@@ -21,21 +21,23 @@ class ProjectPermissionRule implements ValidationRule
         $projectXid = $value;
         $projectRepository = new ProjectRepository();
         $project = $projectRepository->findOneActiveByXid($projectXid);
-        if (!$project) {
+        if (! $project) {
             $fail('xid.message.invalid');
         }
 
         (new MemberOfProjectRule())->validate($attribute, $value, $fail);
 
         $member = Auth::user();
-        if (!$member) {
+        if (! $member) {
             $fail('xid.message.invalid');
+
             return;
         }
 
         $memberHasPermission = $projectRepository->memberHasPermission($project, $member, $this->permission);
-        if (!$memberHasPermission) {
+        if (! $memberHasPermission) {
             $fail('xid.message.invalid');
+
             return;
         }
 
