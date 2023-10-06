@@ -2,25 +2,16 @@
 
 namespace Yormy\TribeLaravel\Observers\Events;
 
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
-
-class TribeMembershipInvitedNonMemberEven
+class TribeMembershipInvitedNonMemberEvent extends BaseProjectMemberEvent
 {
-    use Dispatchable;
-    use SerializesModels;
-    public function __construct(private $project, private readonly string $email)
+
+    public function __construct(private $project, private $member, private $inviter)
     {
-        // ...
+        parent::__construct($project, $member);
     }
 
-    public function getProject()
+    public function getInviter()
     {
-        return $this->project;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
+        return $this->inviter;
     }
 }
