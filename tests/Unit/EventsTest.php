@@ -34,7 +34,6 @@ class EventsTest extends TestCase
      * @test
      *
      * @group tribe-events
-     * @group xxx
      */
     public function TribeMembership_Invite_Event(): void
     {
@@ -57,7 +56,6 @@ class EventsTest extends TestCase
      * @test
      *
      * @group tribe-events
-     * @group xxx
      */
     public function TribeMembership_InviteAccepted_Event(): void
     {
@@ -78,7 +76,6 @@ class EventsTest extends TestCase
      * @test
      *
      * @group tribe-events
-     * @group xxx
      */
     public function TribeMembership_InviteDenied_Event(): void
     {
@@ -102,7 +99,6 @@ class EventsTest extends TestCase
      * @test
      *
      * @group tribe-events
-     * @group xxx
      */
     public function TribeMembership_Left_Event(): void
     {

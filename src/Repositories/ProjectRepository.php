@@ -100,14 +100,14 @@ class ProjectRepository
             'invited_by' => $userResolverClass::get()->id,
             'expires_at' => $expiresAt,
         ];
-        $project->memberships()->attach($member, $data);
+        $project->tribeMemberships()->attach($member, $data);
 
         TribeMembershipInvitedEvent::dispatch($project, $member);
     }
 
     public function pendingInvite(Project $project, $member): bool
     {
-        $query = $project->memberships();
+        $query = $project->tribeMemberships();
         $query = $this->scopeMember($query, $member);
         $query = $this->scopeNotJoined($query);
         $query = $this->scopeNotExpired($query);
@@ -122,7 +122,7 @@ class ProjectRepository
 
     public function isMember(Project $project, $member): bool
     {
-        $query = $project->memberships();
+        $query = $project->tribeMemberships();
         $query = $this->scopeMember($query, $member);
         $query = $this->scopeActive($query);
 
@@ -133,7 +133,7 @@ class ProjectRepository
 
     public function allActiveMembers(Project $project): Collection
     {
-        $query = $project->memberships();
+        $query = $project->tribeMemberships();
         $query = $this->scopeActive($query);
 
         return $query->get();
@@ -150,7 +150,7 @@ class ProjectRepository
 
     public function isMemberWithRole(Project $project, $member, TribeRole $role): bool
     {
-        $query = $project->memberships();
+        $query = $project->tribeMemberships();
         $query = $this->scopeActive($query);
         $query = $this->scopeMember($query, $member);
 

@@ -23,7 +23,7 @@ class Project extends BaseModel
         'email',
     ];
 
-    public function memberships(): BelongsToMany
+    public function tribeMemberships(): BelongsToMany
     {
         $memberClass = config('tribe.models.member');
 

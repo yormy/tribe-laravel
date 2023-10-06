@@ -2,11 +2,13 @@
 
 namespace Yormy\TribeLaravel\Tests\Unit;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
 use Yormy\TribeLaravel\Models\Project;
-use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Models\TribePermission;
+use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Repositories\ProjectRepository;
+use Yormy\TribeLaravel\Repositories\TribeMembershipRepository;
 use Yormy\TribeLaravel\Tests\TestCase;
 use Yormy\TribeLaravel\Tests\Traits\MemberTrait;
 use Yormy\TribeLaravel\Tests\Unit\Traits\AssertInviteTrait;
@@ -96,5 +98,33 @@ class RolePermissionTest extends TestCase
         $projectRepository = new ProjectRepository();
         $memberHasRole = $projectRepository->memberHasPermission($project, $member, 'missing_permission_name');
         $this->assertFalse($memberHasRole);
+    }
+
+    /**
+     * @test
+     *
+     * @group tribe-rolepermission
+     * @group xxx
+     */
+    public function TribeMembership_ChangeRole_OnlyNewPermission(): void
+    {
+        $member = $this->createMember();
+        $project = Project::factory()->create();
+
+        $role = TribeRole::factory()->project($project)->create();
+        TribePermission::factory()->role($role)->create(['name' => 'old_role_permission']);
+
+        $this->inviteAndAccept($project, $member, $role);
+
+        $membership = $member->tribeMemberships->first();
+        $tibeMembershipRepository = new TribeMembershipRepository();
+        $newRole = TribeRole::factory()->project($project)->create();
+        TribePermission::factory()->role($newRole)->create(['name' => 'new_role_permission']);
+        $tibeMembershipRepository->setRole($membership, $newRole , CarbonImmutable::now()->addDay());
+
+        $projectRepository = new ProjectRepository();
+        $member->refresh();
+        $this->assertFalse($projectRepository->memberHasPermission($project, $member, 'old_role_permission'));
+        $this->assertTrue($projectRepository->memberHasPermission($project, $member, 'new_role_permission'));
     }
 }
