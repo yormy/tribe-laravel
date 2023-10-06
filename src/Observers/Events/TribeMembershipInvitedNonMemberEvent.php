@@ -5,12 +5,10 @@ namespace Yormy\TribeLaravel\Observers\Events;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TribeMembershipInvitedNonMemberEvent
+class TribeMembershipInvitedNonMemberEven
 {
     use Dispatchable;
     use SerializesModels;
-
-
     public function __construct(private $project, private readonly string $email)
     {
         // ...

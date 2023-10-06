@@ -5,11 +5,6 @@ assert event fired / emails  => implement in testapp
 only show my projects
 only show my active projects
 
-
-
-
-
-
 # add default roles ?
 or god permission (rol = tribe_admin, permission = all)
 
