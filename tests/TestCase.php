@@ -12,7 +12,7 @@ use Yormy\TribeLaravel\Tests\Setup\Routes\TribeLaravelUploadRoutes;
 
 abstract class TestCase extends BaseTestCase
 {
-    //use RefreshDatabase;
+    use RefreshDatabase;
 
     private $useMinio = true;
 
