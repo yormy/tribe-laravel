@@ -5,7 +5,8 @@ use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Services\Resolvers\IpResolver;
 use Yormy\TribeLaravel\Services\Resolvers\UserAgentResolver;
 use Yormy\TribeLaravel\Services\Resolvers\UserResolver;
-use Yormy\TribeLaravel\Tests\Setup\Models\Member;
+//use Yormy\TribeLaravel\Tests\Setup\Models\Member;
+use Mexion\BedrockUsersv2\Domain\User\Models\Member;
 
 return [
     /*
