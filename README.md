@@ -14,3 +14,4 @@
 ## License
 
 The MIT License (MIT). Please see [License File]((https://yormy.github.io/tribe-laravel/general/license.html) for more information.
+
