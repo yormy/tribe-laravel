@@ -14,7 +14,7 @@ class TokenService
      * This allows us to validate the token (decrypt it) without database access
      * Before validating the token.
      */
-    public static function generate(string $encryptionKey = null)
+    public static function generate(?string $encryptionKey = null)
     {
         $encrypter = self::getEncrypter($encryptionKey);
         $token = Str::random(40);
@@ -22,7 +22,7 @@ class TokenService
         return $encrypter->encryptString($token);
     }
 
-    public static function validate($payload, string $encryptionKey = null): bool
+    public static function validate($payload, ?string $encryptionKey = null): bool
     {
         $encrypter = self::getEncrypter($encryptionKey);
         try {
@@ -34,7 +34,7 @@ class TokenService
         }
     }
 
-    private static function getEncrypter(string $encryptionKey = null)
+    private static function getEncrypter(?string $encryptionKey = null)
     {
         if (! $encryptionKey) {
             $key = config('tribe.api_encryption_key', config('app.key'));

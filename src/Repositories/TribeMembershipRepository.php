@@ -10,7 +10,7 @@ use Yormy\TribeLaravel\Models\TribeRole;
 
 class TribeMembershipRepository
 {
-    public function setRole(TribeMembership $membership, TribeRole $role, CarbonImmutable $expiresAt = null): void
+    public function setRole(TribeMembership $membership, TribeRole $role, ?CarbonImmutable $expiresAt = null): void
     {
         $membership->role_id = $role->id;
 

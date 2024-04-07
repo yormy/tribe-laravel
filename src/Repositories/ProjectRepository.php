@@ -86,7 +86,7 @@ class ProjectRepository
         }
     }
 
-    public function inviteMember(Project $project, $member, $role, CarbonImmutable $expiresAt = null): void
+    public function inviteMember(Project $project, $member, $role, ?CarbonImmutable $expiresAt = null): void
     {
         if (! $expiresAt) {
             $months = config('tribe.default_expire_membership_months', 12);
