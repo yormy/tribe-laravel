@@ -70,6 +70,7 @@ trait MembershipScopeTrait
     {
         $query = $this->scopeJoined($query);
         $query = $this->scopeNotExpired($query);
+
         return $this->scopeNotDeleted($query);
     }
 }
