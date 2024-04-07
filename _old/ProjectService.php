@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\ProjectMembersLaravel\Services;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Encryption\Encrypter;
-use Illuminate\Support\Str;
 use Yormy\ProjectMembersLaravel\Exceptions\InvalidInviteTokenException;
 use Yormy\ProjectMembersLaravel\Models\ProjectInvite;
 use Yormy\ProjectMembersLaravel\Models\ProjectMember;
@@ -48,7 +48,7 @@ class ProjectService
     //        }
     //    }
 
-    public function updateMembership($project, $member, array $data)
+    public function updateMembership($project, $member, array $data): void
     {
         $membership = $this->getMembership($project, $member);
         if ($membership) {
@@ -65,7 +65,7 @@ class ProjectService
             ->first();
     }
 
-    public function leaveProject($project, $member)
+    public function leaveProject($project, $member): void
     {
         $membership = $this->getMembership($project, $member);
         if ($membership) {
@@ -157,7 +157,7 @@ class ProjectService
         return $inviteReceived;
     }
 
-    private function addMember($projectId, $memberId)
+    private function addMember($projectId, $memberId): void
     {
         ProjectMember::create([
             'project_id' => $projectId,

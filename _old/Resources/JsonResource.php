@@ -14,6 +14,11 @@ class JsonResource extends BaseJsonResource
         $this->withoutWrapping();
     }
 
+    public function makeSearchable()
+    {
+        return ['dummy' => '@'];
+    }
+
     /** @psalm-suppress UndefinedInterfaceMethod */
     protected function getDates(array $fields): array
     {
@@ -26,10 +31,5 @@ class JsonResource extends BaseJsonResource
         }
 
         return $dates;
-    }
-
-    public function makeSearchable()
-    {
-        return ['dummy' => '@'];
     }
 }

@@ -10,8 +10,6 @@ class UserResolver
 {
     public static function get()
     {
-        $user = Auth::user();
-
-        return $user;
+        return Auth::user();
     }
 }

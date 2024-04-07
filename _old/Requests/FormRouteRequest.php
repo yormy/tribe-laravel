@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\ProjectMembersLaravel\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -12,19 +14,19 @@ abstract class FormRouteRequest extends FormRequest
 
     public function rules()
     {
-        if ($this->method() == 'GET') {
+        if ($this->method() === 'GET') {
             return $this->getRequest();
         }
 
-        if ($this->method() == 'POST') {
+        if ($this->method() === 'POST') {
             return $this->postRequest();
         }
 
-        if ($this->method() == 'PUT') {
+        if ($this->method() === 'PUT') {
             return $this->putRequest();
         }
 
-        if ($this->method() == 'DELETE') {
+        if ($this->method() === 'DELETE') {
             return $this->deleteRequest();
         }
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\ProjectMembersLaravel\Http\Resources;
 
 class ProjectWhitelistedIpResource extends JsonResource

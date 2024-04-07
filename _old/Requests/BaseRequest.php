@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\ProjectMembersLaravel\Http\Requests;
 
 class BaseRequest extends FormRouteRequest
@@ -10,10 +12,8 @@ class BaseRequest extends FormRouteRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $rules['i18n'] = [
             'required',
@@ -24,12 +24,12 @@ class BaseRequest extends FormRouteRequest
 
         $allRules = [];
 
-        if ($this->getMethod() == 'POST') {
+        if ($this->getMethod() === 'POST') {
             $createRules = $this->createValidation();
             $allRules = array_merge($rules, $createRules);
         }
 
-        if ($this->getMethod() == 'PUT') {
+        if ($this->getMethod() === 'PUT') {
             $updateRules = $this->updateValidation();
             $allRules = array_merge($rules, $updateRules);
         }
@@ -39,15 +39,11 @@ class BaseRequest extends FormRouteRequest
 
     private function createValidation()
     {
-        $rules = [];
-
-        return $rules;
+        return [];
     }
 
     private function updateValidation()
     {
-        $rules = [];
-
-        return $rules;
+        return [];
     }
 }

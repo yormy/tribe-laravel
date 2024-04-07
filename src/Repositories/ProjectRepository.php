@@ -112,7 +112,7 @@ class ProjectRepository
         $query = $this->scopeNotExpired($query);
 
         $table = (new TribeMembership())->getTable();
-        $query->whereNull("$table.deleted_at");
+        $query->whereNull("{$table}.deleted_at");
 
         $found = $query->first();
 
@@ -162,7 +162,7 @@ class ProjectRepository
 
     public function memberHasPermission(Project $project, $member, $permission): bool
     {
-        $permsCollection = TribePermission::whereIn('role_id', function ($query) use ($member, $project) {
+        $permsCollection = TribePermission::whereIn('role_id', function ($query) use ($member, $project): void {
             $query->select('role_id')
                 ->from('tribe_memberships');
             $query = $this->scopeMember($query, $member);

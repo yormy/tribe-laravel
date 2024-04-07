@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\ProjectMembersLaravel\Http\Resources;
 
 use Illuminate\Support\Carbon;

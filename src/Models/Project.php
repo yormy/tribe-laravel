@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\TribeLaravel\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,6 +15,7 @@ use Yormy\Xid\Models\Traits\Xid;
  *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Yormy\TribeLaravel\Tests\Setup\Models\Member> $tribeMemberships
  * @property-read int|null $tribe_memberships_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Project active()
  * @method static \Yormy\TribeLaravel\Database\Factories\ProjectFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Project invited()
@@ -30,6 +33,7 @@ use Yormy\Xid\Models\Traits\Xid;
  * @method static \Illuminate\Database\Eloquent\Builder|Project role($role)
  * @method static \Illuminate\Database\Eloquent\Builder|Project withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Project withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Project extends BaseModel

@@ -57,7 +57,7 @@ trait MembershipScopeTrait
         $table = (new TribeMembership())->getTable();
 
         return $query
-            ->whereNull("$table.deleted_at");
+            ->whereNull("{$table}.deleted_at");
     }
 
     public function scopeNotDisabled($query)
@@ -70,8 +70,6 @@ trait MembershipScopeTrait
     {
         $query = $this->scopeJoined($query);
         $query = $this->scopeNotExpired($query);
-        $query = $this->scopeNotDeleted($query);
-
-        return $query;
+        return $this->scopeNotDeleted($query);
     }
 }

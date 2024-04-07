@@ -40,6 +40,5 @@ class ProjectPermissionRule implements ValidationRule
 
             return;
         }
-
     }
 }

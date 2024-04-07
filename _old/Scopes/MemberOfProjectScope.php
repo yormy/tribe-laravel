@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\ProjectMembersLaravel\Models\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -31,7 +33,7 @@ class MemberOfProjectScope implements Scope
     {
         $projectTable = $this->project->getTable();
 
-        return $builder->whereIn("$projectTable.id", function ($query) {
+        return $builder->whereIn("{$projectTable}.id", function ($query): void {
             $user = Auth::user();
 
             $projectMembersTable = config('project-members-laravel.tables.project_members');
@@ -48,7 +50,7 @@ class MemberOfProjectScope implements Scope
                     ->from($projectMembersTable)
                     ->whereNull('deleted_at')
                     ->where('user_id', '=', $user->id)
-                    ->where(function ($query) {
+                    ->where(function ($query): void {
                         $query->whereNull('expires_at')
                             ->orWhere('expires_at', '>', Carbon::now());
                     });

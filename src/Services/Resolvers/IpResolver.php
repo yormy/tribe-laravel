@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\TribeLaravel\Services\Resolvers;
 
 use Illuminate\Http\Request;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\TribeLaravel;
 
 use Illuminate\Routing\Router;
@@ -9,16 +11,16 @@ use Yormy\TribeLaravel\ServiceProviders\RouteServiceProvider;
 
 class TribeServiceProvider extends ServiceProvider
 {
-    const CONFIG_FILE = __DIR__.'/../config/tribe.php';
+    public const CONFIG_FILE = __DIR__.'/../config/tribe.php';
 
-    const CONFIG_FILE_CHUNKED = __DIR__.'/../config/chunk-upload.php';
+    public const CONFIG_FILE_CHUNKED = __DIR__.'/../config/chunk-upload.php';
 
-    const CONFIG_IDE_HELPER_FILE = __DIR__.'/../config/ide-helper.php';
+    public const CONFIG_IDE_HELPER_FILE = __DIR__.'/../config/ide-helper.php';
 
     /**
      * @psalm-suppress MissingReturnType
      */
-    public function boot(Router $router)
+    public function boot(Router $router): void
     {
         $this->publish();
 
@@ -34,13 +36,18 @@ class TribeServiceProvider extends ServiceProvider
     /**
      * @psalm-suppress MixedArgument
      */
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(static::CONFIG_FILE, 'tribe');
         $this->mergeConfigFrom(static::CONFIG_IDE_HELPER_FILE, 'ide-helper');
 
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
+    }
+
+    public function registerTranslations(): void
+    {
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tribe');
     }
 
     private function publish(): void
@@ -68,13 +75,7 @@ class TribeServiceProvider extends ServiceProvider
         }
     }
 
-    public function registerTranslations(): void
-    {
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tribe');
-    }
-
     private function morphMaps(): void
     {
-
     }
 }

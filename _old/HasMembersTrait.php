@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\ProjectMembersLaravel\Traits;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,8 +18,8 @@ trait HasMembersTrait
 
         return $this->membersBase()
             ->select(['members.*', 'project_role', 'expires_at'])
-            ->selectRaw("project_role = '$roleOwner' as is_owner")
-            ->where(function ($query) {
+            ->selectRaw("project_role = '{$roleOwner}' as is_owner")
+            ->where(function ($query): void {
                 $query->whereNull('expires_at')
                     ->orWhere('expires_at', '>', Carbon::now());
             });
@@ -29,28 +31,13 @@ trait HasMembersTrait
 
         return $this->membersBase()
             ->select(['members.*', 'project_role', 'expires_at'])
-            ->selectRaw("project_role = '$roleOwner' as is_owner");
-    }
-
-    private function membersBase()
-    {
-        $memberModel = config('project-members-laravel.models.member');
-        $projectMemberModel = config('project-members-laravel.models.project_member');
-
-        return $this->hasManyThrough(
-            $memberModel,
-            $projectMemberModel,
-            null,
-            'id',
-            null,
-            'user_id'
-        );
+            ->selectRaw("project_role = '{$roleOwner}' as is_owner");
     }
 
     public function isOwner($member): bool
     {
         $membersTable = config('project-members-laravel.tables.members');
-        $ownerIds = $this->owners()->select("$membersTable.*")->pluck('id', 'id');
+        $ownerIds = $this->owners()->select("{$membersTable}.*")->pluck('id', 'id');
 
         return Arr::exists($ownerIds, $member->id);
     }
@@ -98,5 +85,20 @@ trait HasMembersTrait
             ->where('user_id', $member->id)
             ->whereIn('project_role', $roles)
             ->first() !== null;
+    }
+
+    private function membersBase()
+    {
+        $memberModel = config('project-members-laravel.models.member');
+        $projectMemberModel = config('project-members-laravel.models.project_member');
+
+        return $this->hasManyThrough(
+            $memberModel,
+            $projectMemberModel,
+            null,
+            'id',
+            null,
+            'user_id'
+        );
     }
 }

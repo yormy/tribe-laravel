@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\TribeLaravel\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,6 +26,7 @@ use Yormy\TribeLaravel\Models\Scopes\MembershipScopeTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|TribeMembership role($role)
  * @method static \Illuminate\Database\Eloquent\Builder|TribeMembership withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|TribeMembership withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class TribeMembership extends BaseModel
@@ -31,9 +34,9 @@ class TribeMembership extends BaseModel
     use MembershipScopeTrait;
     use SoftDeletes;
 
-    protected $table = 'tribe_memberships';
-
     public $timestamps = false;
+
+    protected $table = 'tribe_memberships';
 
     protected $fillable = [
         'member_id',

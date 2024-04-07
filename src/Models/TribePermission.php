@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\TribeLaravel\Models;
 
 use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
@@ -11,15 +13,16 @@ use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|TribePermission newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TribePermission newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TribePermission query()
+ *
  * @mixin \Eloquent
  */
 class TribePermission extends BaseModel
 {
     use PackageFactoryTrait;
 
-    protected $table = 'tribe_permissions';
-
     public $timestamps = false;
+
+    protected $table = 'tribe_permissions';
 
     protected $fillable = [
         'code',
