@@ -1,0 +1,611 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Access to an undefined property Yormy\\\\TribeLaravel\\\\Models\\\\TribeRole\\:\\:\\$id\\.$#"
+			count: 1
+			path: src/Database/Factories/TribePermissionFactory.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:\\$id\\.$#"
+			count: 1
+			path: src/Database/Factories/TribeRoleFactory.php
+
+		-
+			message: "#^PHPDoc tag @mixin contains unknown class Eloquent\\.$#"
+			count: 1
+			path: src/Models/BaseModel.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:\\$id\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeActive\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeActive\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeInvited\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeInvited\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeJoined\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeJoined\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeMember\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeMember\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeMember\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeNotDeleted\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeNotDeleted\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeNotDisabled\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeNotDisabled\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeNotExpired\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeNotExpired\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeNotJoined\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeNotJoined\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeProject\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeProject\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeRole\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeRole\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:scopeRole\\(\\) has parameter \\$role with no type specified\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^PHPDoc tag @mixin contains unknown class Eloquent\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Parameter \\#1 \\$related of method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:belongsToMany\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Models/Project.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:\\$id\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeActive\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeActive\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeInvited\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeInvited\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeJoined\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeJoined\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeMember\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeMember\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeMember\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeNotDeleted\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeNotDeleted\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeNotDisabled\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeNotDisabled\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeNotExpired\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeNotExpired\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeNotJoined\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeNotJoined\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeProject\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeProject\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeRole\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeRole\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:scopeRole\\(\\) has parameter \\$role with no type specified\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^PHPDoc tag @mixin contains unknown class Eloquent\\.$#"
+			count: 1
+			path: src/Models/TribeMembership.php
+
+		-
+			message: "#^PHPDoc tag @mixin contains unknown class Eloquent\\.$#"
+			count: 1
+			path: src/Models/TribePermission.php
+
+		-
+			message: "#^PHPDoc tag @mixin contains unknown class Eloquent\\.$#"
+			count: 1
+			path: src/Models/TribeRole.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Observers\\\\Events\\\\BaseProjectMemberEvent\\:\\:__construct\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Observers/Events/BaseProjectMemberEvent.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Observers\\\\Events\\\\BaseProjectMemberEvent\\:\\:__construct\\(\\) has parameter \\$project with no type specified\\.$#"
+			count: 1
+			path: src/Observers/Events/BaseProjectMemberEvent.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Observers\\\\Events\\\\BaseProjectMemberEvent\\:\\:getMember\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Observers/Events/BaseProjectMemberEvent.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Observers\\\\Events\\\\BaseProjectMemberEvent\\:\\:getProject\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Observers/Events/BaseProjectMemberEvent.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Observers\\\\Events\\\\BaseProjectMemberEvent\\:\\:getProjectName\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Observers/Events/BaseProjectMemberEvent.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Observers\\\\Events\\\\TribeMembershipInvitedNonMemberEvent\\:\\:__construct\\(\\) has parameter \\$inviter with no type specified\\.$#"
+			count: 1
+			path: src/Observers/Events/TribeMembershipInvitedNonMemberEvent.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Observers\\\\Events\\\\TribeMembershipInvitedNonMemberEvent\\:\\:__construct\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Observers/Events/TribeMembershipInvitedNonMemberEvent.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Observers\\\\Events\\\\TribeMembershipInvitedNonMemberEvent\\:\\:__construct\\(\\) has parameter \\$project with no type specified\\.$#"
+			count: 1
+			path: src/Observers/Events/TribeMembershipInvitedNonMemberEvent.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Observers\\\\Events\\\\TribeMembershipInvitedNonMemberEvent\\:\\:getInviter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Observers/Events/TribeMembershipInvitedNonMemberEvent.php
+
+		-
+			message: "#^Property Yormy\\\\TribeLaravel\\\\Observers\\\\Events\\\\TribeMembershipInvitedNonMemberEvent\\:\\:\\$member is never read, only written\\.$#"
+			count: 1
+			path: src/Observers/Events/TribeMembershipInvitedNonMemberEvent.php
+
+		-
+			message: "#^Property Yormy\\\\TribeLaravel\\\\Observers\\\\Events\\\\TribeMembershipInvitedNonMemberEvent\\:\\:\\$project is never read, only written\\.$#"
+			count: 1
+			path: src/Observers/Events/TribeMembershipInvitedNonMemberEvent.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\TribeLaravel\\\\Models\\\\Project\\:\\:\\$id\\.$#"
+			count: 4
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Call to an undefined static method Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:where\\(\\)\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Call to an undefined static method Yormy\\\\TribeLaravel\\\\Models\\\\TribePermission\\:\\:whereIn\\(\\)\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Cannot call method where\\(\\) on Yormy\\\\TribeLaravel\\\\Models\\\\Project\\|null\\.$#"
+			count: 3
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Cannot call static method get\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Carbon\\\\CarbonImmutable\\:\\:addMonth\\(\\) invoked with 1 parameter, 0 required\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:acceptInvite\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:allActiveProjects\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:denyInvite\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:inviteMember\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:inviteMember\\(\\) has parameter \\$role with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:isMember\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:isMemberWithRole\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:leave\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:memberHasPermission\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:memberHasPermission\\(\\) has parameter \\$permission with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:pendingInvite\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeActive\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeActive\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeInvited\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeInvited\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeJoined\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeJoined\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeMember\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeMember\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeMember\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeNotDeleted\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeNotDeleted\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeNotDisabled\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeNotDisabled\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeNotExpired\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeNotExpired\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeNotJoined\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeNotJoined\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeProject\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeProject\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeRole\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeRole\\(\\) has parameter \\$query with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:scopeRole\\(\\) has parameter \\$role with no type specified\\.$#"
+			count: 1
+			path: src/Repositories/ProjectRepository.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:\\$expires_at\\.$#"
+			count: 1
+			path: src/Repositories/TribeMembershipRepository.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\TribeLaravel\\\\Models\\\\TribeMembership\\:\\:\\$role_id\\.$#"
+			count: 1
+			path: src/Repositories/TribeMembershipRepository.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\TribeLaravel\\\\Models\\\\TribeRole\\:\\:\\$id\\.$#"
+			count: 1
+			path: src/Repositories/TribeMembershipRepository.php
+
+		-
+			message: "#^Parameter \\#1 \\$xid of method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:findOneByXid\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Rules/MemberOfProjectRule.php
+
+		-
+			message: "#^Parameter \\#1 \\$xid of method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:findOneActiveByXid\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Rules/ProjectActiveRule.php
+
+		-
+			message: "#^Parameter \\#1 \\$apiKey of method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:findOneActiveByApiKey\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Rules/ProjectApiKeyRule.php
+
+		-
+			message: "#^Parameter \\#1 \\$xid of method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:findOneByXid\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Rules/ProjectExistsRule.php
+
+		-
+			message: "#^Parameter \\#1 \\$project of method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:memberHasPermission\\(\\) expects Yormy\\\\TribeLaravel\\\\Models\\\\Project, Yormy\\\\TribeLaravel\\\\Models\\\\Project\\|null given\\.$#"
+			count: 1
+			path: src/Rules/ProjectPermissionRule.php
+
+		-
+			message: "#^Parameter \\#1 \\$xid of method Yormy\\\\TribeLaravel\\\\Repositories\\\\ProjectRepository\\:\\:findOneActiveByXid\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Rules/ProjectPermissionRule.php
+
+		-
+			message: "#^Cannot call method ip\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Services/Resolvers/IpResolver.php
+
+		-
+			message: "#^Parameter \\#1 \\$ip of static method Yormy\\\\TribeLaravel\\\\Services\\\\Resolvers\\\\IpResolver\\:\\:matches\\(\\) expects string, array\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Services/Resolvers/IpResolver.php
+
+		-
+			message: "#^Parameter \\#1 \\$propertyName of method Jenssegers\\\\Agent\\\\Agent\\:\\:version\\(\\) expects string, bool\\|string given\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserAgentResolver.php
+
+		-
+			message: "#^Parameter \\#1 \\$propertyName of method Jenssegers\\\\Agent\\\\Agent\\:\\:version\\(\\) expects string, string\\|true given\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserAgentResolver.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Services\\\\Resolvers\\\\UserResolver\\:\\:get\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserResolver.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Services\\\\TokenService\\:\\:generate\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Services/TokenService.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Services\\\\TokenService\\:\\:getEncrypter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Services/TokenService.php
+
+		-
+			message: "#^Method Yormy\\\\TribeLaravel\\\\Services\\\\TokenService\\:\\:validate\\(\\) has parameter \\$payload with no type specified\\.$#"
+			count: 1
+			path: src/Services/TokenService.php
+
+		-
+			message: "#^Parameter \\#3 \\$subject of function str_replace expects array\\|string, mixed given\\.$#"
+			count: 1
+			path: src/Services/TokenService.php
