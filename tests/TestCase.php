@@ -62,7 +62,6 @@ abstract class TestCase extends BaseTestCase
 
     }
 
-
     protected function refreshTestDatabase(): void
     {
         if (! RefreshDatabaseState::$migrated) {

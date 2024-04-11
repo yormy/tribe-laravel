@@ -10,11 +10,11 @@ return new class extends Migration
     public function up()
     {
         $memberClass = config('tribe.models.member');
-        if (!$memberClass) {
+        if (! $memberClass) {
             throw new InvalidValueException('Missing config for tribe.models.member class');
         }
         $projectClass = config('tribe.models.project');
-        if (!$projectClass) {
+        if (! $projectClass) {
             throw new InvalidValueException('Missing config for tribe.models.project class');
         }
 
