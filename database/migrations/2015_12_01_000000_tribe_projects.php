@@ -5,12 +5,17 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Yormy\TribeLaravel\Exceptions\InvalidValueException;
 
 return new class extends Migration
 {
     public function up()
     {
         $projectClass = config('tribe.models.project');
+        if (!$projectClass) {
+            throw new InvalidValueException('Missing config for tribe.models.project class');
+        }
+
         Schema::create((new $projectClass())->getTable(), function (Blueprint $table) {
             $table->id();
             $table->string('xid')->unique();

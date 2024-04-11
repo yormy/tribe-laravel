@@ -1,12 +1,11 @@
 <?php
 
-use Mexion\BedrockUsersv2\Domain\User\Models\Member;
 use Yormy\TribeLaravel\Models\Project;
 use Yormy\TribeLaravel\Models\TribeRole;
 use Yormy\TribeLaravel\Services\Resolvers\IpResolver;
 use Yormy\TribeLaravel\Services\Resolvers\UserAgentResolver;
-//use Yormy\TribeLaravel\Tests\Setup\Models\Member;
 use Yormy\TribeLaravel\Services\Resolvers\UserResolver;
+use Yormy\TribeLaravel\Tests\Setup\Models\Member;
 
 return [
     /*
@@ -39,7 +38,7 @@ return [
     |
     */
     'models' => [
-        'member' => Member::class,
+        'member' => Member::class, // your members class
         'project' => Project::class,
         'role' => TribeRole::class,
     ],

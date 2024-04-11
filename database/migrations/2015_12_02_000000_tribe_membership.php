@@ -3,13 +3,20 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Yormy\TribeLaravel\Exceptions\InvalidValueException;
 
 return new class extends Migration
 {
     public function up()
     {
         $memberClass = config('tribe.models.member');
+        if (!$memberClass) {
+            throw new InvalidValueException('Missing config for tribe.models.member class');
+        }
         $projectClass = config('tribe.models.project');
+        if (!$projectClass) {
+            throw new InvalidValueException('Missing config for tribe.models.project class');
+        }
 
         Schema::create('tribe_memberships', function (Blueprint $table) use ($memberClass, $projectClass) {
             $table->id();
