@@ -63,11 +63,11 @@ function badgeInsightsSecurity(): void
     }
 
     $insights = getInsights();
-    if (! array_key_exists('security_issues', $insights['summary'])) {
+    if (! array_key_exists('security issues', $insights['summary'])) {
         $color = 'red';
         $issues = 'unknown';
     } else {
-        $issues = (int) $insights['summary']['security_issues'];
+        $issues = (int) $insights['summary']['security issues'];
         if ($issues === 0) {
             $color = 'green';
         } else {
